@@ -106,34 +106,44 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 /* add test data to Customers*/
-INSERT INTO `cs340_gullot`.`Customers` (`customerName`, `telephone`) VALUES ('Regina', '99-123-456-7890');
-INSERT INTO `cs340_gullot`.`Customers` (`customerName`, `telephone`) VALUES ('George', '12-156-184-4452');
-INSERT INTO `cs340_gullot`.`Customers` (`customerName`, `telephone`) VALUES ('Lee', '55-856-155-4154');
+INSERT INTO `cs340_gullot`.`Customers` (`customerName`, `telephone`)
+VALUES 
+('Regina', '99-123-456-7890'),
+('George', '12-156-184-4452'),
+('Lee', '55-856-155-4154');
 
 /* add test data to Spaceships */
-INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`) VALUES ('Toyoda', 'Spamry', '3');
-INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`) VALUES ('Jonda', 'Spinsight', '3');
-INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`) VALUES ('Fjord', 'Fjocus', '2');
-INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`) VALUES ('Starwagon', 'StarRabbit', '1');
-INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`) VALUES ('Toyoda', 'Spamry', '1');
+INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`)
+VALUES 
+('Toyoda', 'Spamry', '3'),
+('Jonda', 'Spinsight', '3'),
+('Fjord', 'Fjocus', '2'),
+('Starwagon', 'StarRabbit', '1'),
+('Toyoda', 'Spamry', '1');
 
 /* add test data to RepairTypes */
-INSERT INTO `cs340_gullot`.`RepairTypes` (`repairName`, `cost`) VALUES ('Galactic Oil Change', '35');
-INSERT INTO `cs340_gullot`.`RepairTypes` (`repairName`, `cost`) VALUES ('Spaceshield Replacement', '50');
-INSERT INTO `cs340_gullot`.`RepairTypes` (`repairName`, `cost`) VALUES ('Landing Gear Fluid Change', '45');
-INSERT INTO `cs340_gullot`.`RepairTypes` (`repairName`, `cost`) VALUES ('Muffler Repair', '30');
+INSERT INTO `cs340_gullot`.`RepairTypes` (`repairName`, `cost`)
+VALUES 
+('Galactic Oil Change', '35'),
+('Spaceshield Replacement', '50'),
+('Landing Gear Fluid Change', '45'),
+('Muffler Repair', '30');
 
 /* add test data to Invoices */
-INSERT INTO `cs340_gullot`.`Invoices` (`cost`, `spaceshipID`) VALUES ('85', '2');
-INSERT INTO `cs340_gullot`.`Invoices` (`cost`, `spaceshipID`) VALUES ('95', '3');
-INSERT INTO `cs340_gullot`.`Invoices` (`cost`, `spaceshipID`) VALUES ('30', '5');
+INSERT INTO `cs340_gullot`.`Invoices` (`cost`, `spaceshipID`)
+VALUES
+('85', '2'),
+('95', '3'),
+('30', '5');
 
 /* add test data to InvoiceDetails */
-INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`) VALUES ('1', '1');
-INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`) VALUES ('1', '2');
-INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`) VALUES ('2', '2');
-INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`) VALUES ('2', '3');
-INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`) VALUES ('3', '4');
+INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`)
+VALUES
+('1', '1'),
+('1', '2'),
+('2', '2'),
+('2', '3'),
+('3', '4');
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
