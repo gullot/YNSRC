@@ -1,149 +1,225 @@
-SET FOREIGN_KEY_CHECKS=0;
-SET AUTOCOMMIT = 0;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1-1.el7.remi
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Jul 17, 2023 at 05:35 PM
+-- Server version: 10.6.12-MariaDB-log
+-- PHP Version: 8.2.4
 
--- test
-
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema cs340_gullot
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema cs340_gullot
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `cs340_gullot` DEFAULT CHARACTER SET utf8 ;
-USE `cs340_gullot` ;
-
--- -----------------------------------------------------
--- Table `cs340_gullot`.`Customers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cs340_gullot`.`Customers` (
-  `customerID` INT NOT NULL AUTO_INCREMENT,
-  `customerName` VARCHAR(45) NOT NULL,
-  `telephone` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`customerID`),
-  UNIQUE INDEX `customerID_UNIQUE` (`customerID` ASC) VISIBLE)
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `cs340_gullot`.`Spaceships`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cs340_gullot`.`Spaceships` (
-  `spaceshipID` INT NOT NULL AUTO_INCREMENT,
-  `spaceshipMake` VARCHAR(45) NOT NULL,
-  `spaceshipModel` VARCHAR(45) NOT NULL,
-  `customerID` INT NOT NULL,
-  PRIMARY KEY (`spaceshipID`, `customerID`),
-  UNIQUE INDEX `spaceshipID_UNIQUE` (`spaceshipID` ASC) VISIBLE,
-  INDEX `fk_Spaceships_Customers_idx` (`customerID` ASC) VISIBLE,
-  CONSTRAINT `fk_Spaceships_Customers`
-	FOREIGN KEY (`customerID`)
-	REFERENCES `cs340_gullot`.`Customers` (`customerID`)
-	ON DELETE NO ACTION
-	ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `YNSRC`
+--
 
--- -----------------------------------------------------
--- Table `cs340_gullot`.`Invoices`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cs340_gullot`.`Invoices` (
-  `invoiceID` INT NOT NULL AUTO_INCREMENT,
-  `cost` INT NOT NULL,
-  `spaceshipID` INT NOT NULL,
-  PRIMARY KEY (`invoiceID`, `spaceshipID`),
-  UNIQUE INDEX `invoiceID_UNIQUE` (`invoiceID` ASC) VISIBLE,
-  INDEX `fk_Invoices_Spaceships1_idx` (`spaceshipID` ASC) VISIBLE,
-  CONSTRAINT `fk_Invoices_Spaceships1`
-	FOREIGN KEY (`spaceshipID`)
-	REFERENCES `cs340_gullot`.`Spaceships` (`spaceshipID`)
-	ON DELETE NO ACTION
-	ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `Customers`
+--
 
--- -----------------------------------------------------
--- Table `cs340_gullot`.`RepairTypes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cs340_gullot`.`RepairTypes` (
-  `repairID` INT NOT NULL AUTO_INCREMENT,
-  `repairName` VARCHAR(45) NOT NULL,
-  `cost` INT NOT NULL,
-  PRIMARY KEY (`repairID`),
-  UNIQUE INDEX `repairID_UNIQUE` (`repairID` ASC) VISIBLE)
-ENGINE = InnoDB;
+CREATE TABLE `Customers` (
+  `CustomerID` int(11) NOT NULL,
+  `customerName` varchar(45) NOT NULL,
+  `telephone` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
+--
+-- Dumping data for table `Customers`
+--
 
--- -----------------------------------------------------
--- Table `cs340_gullot`.`InvoiceDetails`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cs340_gullot`.`InvoiceDetails` (
-  `invoiceID` INT NOT NULL,
-  `repairID` INT NOT NULL,
-  PRIMARY KEY (`invoiceID`, `repairID`),
-  INDEX `fk_InvoiceDetails_RepairTypes1_idx` (`repairID` ASC) VISIBLE,
-  CONSTRAINT `fk_InvoiceDetails_Invoices1`
-	FOREIGN KEY (`invoiceID`)
-	REFERENCES `cs340_gullot`.`Invoices` (`invoiceID`)
-	ON DELETE NO ACTION
-	ON UPDATE NO ACTION,
-  CONSTRAINT `fk_InvoiceDetails_RepairTypes1`
-	FOREIGN KEY (`repairID`)
-	REFERENCES `cs340_gullot`.`RepairTypes` (`repairID`)
-	ON DELETE NO ACTION
-	ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+INSERT INTO `Customers` (`CustomerID`, `customerName`, `telephone`) VALUES
+(1, 'Regina', '99-123-456-7890'),
+(2, 'George', '12-156-184-4452'),
+(3, 'Lee', '55-856-155-4154');
 
+-- --------------------------------------------------------
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+--
+-- Table structure for table `InvoiceDetails`
+--
 
-/* add test data to Customers*/
-INSERT INTO `cs340_gullot`.`Customers` (`customerName`, `telephone`)
-VALUES 
-('Regina', '99-123-456-7890'),
-('George', '12-156-184-4452'),
-('Lee', '55-856-155-4154');
+CREATE TABLE `InvoiceDetails` (
+  `invoiceID` int(11) NOT NULL,
+  `repairID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
-/* add test data to Spaceships */
-INSERT INTO `cs340_gullot`.`Spaceships` (`spaceshipMake`, `spaceshipModel`, `customerID`)
-VALUES 
-('Toyoda', 'Spamry', '3'),
-('Jonda', 'Spinsight', '3'),
-('Fjord', 'Fjocus', '2'),
-('Starwagon', 'StarRabbit', '1'),
-('Toyoda', 'Spamry', '1');
+--
+-- Dumping data for table `InvoiceDetails`
+--
 
-/* add test data to RepairTypes */
-INSERT INTO `cs340_gullot`.`RepairTypes` (`repairName`, `cost`)
-VALUES 
-('Galactic Oil Change', '35'),
-('Spaceshield Replacement', '50'),
-('Landing Gear Fluid Change', '45'),
-('Muffler Repair', '30');
+INSERT INTO `InvoiceDetails` (`invoiceID`, `repairID`) VALUES
+(1, 1),
+(1, 2),
+(2, 2),
+(2, 3),
+(3, 4);
 
-/* add test data to Invoices */
-INSERT INTO `cs340_gullot`.`Invoices` (`cost`, `spaceshipID`)
-VALUES
-('85', '2'),
-('95', '3'),
-('30', '5');
+-- --------------------------------------------------------
 
-/* add test data to InvoiceDetails */
-INSERT INTO `cs340_gullot`.`InvoiceDetails` (`invoiceID`, `repairID`)
-VALUES
-('1', '1'),
-('1', '2'),
-('2', '2'),
-('2', '3'),
-('3', '4');
+--
+-- Table structure for table `Invoices`
+--
 
-SET FOREIGN_KEY_CHECKS=1;
+CREATE TABLE `Invoices` (
+  `invoiceID` int(11) NOT NULL,
+  `cost` int(11) NOT NULL,
+  `spaceshipID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `Invoices`
+--
+
+INSERT INTO `Invoices` (`invoiceID`, `cost`, `spaceshipID`) VALUES
+(1, 85, 2),
+(2, 95, 3),
+(3, 30, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RepairTypes`
+--
+
+CREATE TABLE `RepairTypes` (
+  `repairID` int(11) NOT NULL,
+  `repairName` varchar(45) NOT NULL,
+  `cost` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `RepairTypes`
+--
+
+INSERT INTO `RepairTypes` (`repairID`, `repairName`, `cost`) VALUES
+(1, 'Galactic Oil Change', 35),
+(2, 'Spaceshield Replacement', 50),
+(3, 'Landing Gear Fluid Change', 45),
+(4, 'Muffler Repair', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Spaceships`
+--
+
+CREATE TABLE `Spaceships` (
+  `spaceshipID` int(11) NOT NULL,
+  `customerID` int(11) NOT NULL,
+  `spaceshipMake` varchar(45) NOT NULL,
+  `spaceshipModel` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `Spaceships`
+--
+
+INSERT INTO `Spaceships` (`spaceshipID`, `customerID`, `spaceshipMake`, `spaceshipModel`) VALUES
+(1, 3, 'Toyoda', 'Spamry'),
+(2, 3, 'Jonda', 'Spinsight'),
+(3, 2, 'Fjord', 'Fjocus'),
+(4, 1, 'Starwagon', 'StarRabbit'),
+(5, 1, 'Toyoda', 'Spamry');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Customers`
+--
+ALTER TABLE `Customers`
+  ADD PRIMARY KEY (`CustomerID`);
+
+--
+-- Indexes for table `InvoiceDetails`
+--
+ALTER TABLE `InvoiceDetails`
+  ADD KEY `invoiceID` (`invoiceID`),
+  ADD KEY `repairID` (`repairID`);
+
+--
+-- Indexes for table `Invoices`
+--
+ALTER TABLE `Invoices`
+  ADD PRIMARY KEY (`invoiceID`),
+  ADD KEY `spaceshipID` (`spaceshipID`);
+
+--
+-- Indexes for table `RepairTypes`
+--
+ALTER TABLE `RepairTypes`
+  ADD PRIMARY KEY (`repairID`);
+
+--
+-- Indexes for table `Spaceships`
+--
+ALTER TABLE `Spaceships`
+  ADD PRIMARY KEY (`spaceshipID`),
+  ADD KEY `customerID` (`customerID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Customers`
+--
+ALTER TABLE `Customers`
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `Invoices`
+--
+ALTER TABLE `Invoices`
+  MODIFY `invoiceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `RepairTypes`
+--
+ALTER TABLE `RepairTypes`
+  MODIFY `repairID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `Spaceships`
+--
+ALTER TABLE `Spaceships`
+  MODIFY `spaceshipID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `InvoiceDetails`
+--
+ALTER TABLE `InvoiceDetails`
+  ADD CONSTRAINT `InvoiceDetails_ibfk_1` FOREIGN KEY (`invoiceID`) REFERENCES `Invoices` (`invoiceID`),
+  ADD CONSTRAINT `InvoiceDetails_ibfk_2` FOREIGN KEY (`repairID`) REFERENCES `RepairTypes` (`repairID`);
+
+--
+-- Constraints for table `Invoices`
+--
+ALTER TABLE `Invoices`
+  ADD CONSTRAINT `Invoices_ibfk_1` FOREIGN KEY (`spaceshipID`) REFERENCES `Spaceships` (`spaceshipID`);
+
+--
+-- Constraints for table `Spaceships`
+--
+ALTER TABLE `Spaceships`
+  ADD CONSTRAINT `Spaceships_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `Customers` (`CustomerID`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
