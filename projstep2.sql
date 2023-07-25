@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `Customers` (
   `CustomerID` int(11) NOT NULL,
   `customerName` varchar(45) NOT NULL,
-  `telephone` varchar(45) NOT NULL
+  `telephone` varchar(45) NOT NULL,
+  ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
@@ -50,7 +51,8 @@ INSERT INTO `Customers` (`CustomerID`, `customerName`, `telephone`) VALUES
 
 CREATE TABLE `InvoiceDetails` (
   `invoiceID` int(11) NOT NULL,
-  `repairID` int(11) NOT NULL
+  `repairID` int(11) NOT NULL,
+  ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
@@ -73,7 +75,8 @@ INSERT INTO `InvoiceDetails` (`invoiceID`, `repairID`) VALUES
 CREATE TABLE `Invoices` (
   `invoiceID` int(11) NOT NULL,
   `cost` int(11) NOT NULL,
-  `spaceshipID` int(11) NOT NULL
+  `spaceshipID` int(11) NOT NULL,
+  ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
@@ -94,7 +97,8 @@ INSERT INTO `Invoices` (`invoiceID`, `cost`, `spaceshipID`) VALUES
 CREATE TABLE `RepairTypes` (
   `repairID` int(11) NOT NULL,
   `repairName` varchar(45) NOT NULL,
-  `cost` int(11) NOT NULL
+  `cost` int(11) NOT NULL,
+  ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
@@ -117,7 +121,8 @@ CREATE TABLE `Spaceships` (
   `spaceshipID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
   `spaceshipMake` varchar(45) NOT NULL,
-  `spaceshipModel` varchar(45) NOT NULL
+  `spaceshipModel` varchar(45) NOT NULL,
+  ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
