@@ -24,6 +24,10 @@ VALUES (:invoiceID, :repairID)
 INSERT INTO RepairTypes (repairName, cost)
 VALUES (:repairName, :cost)
 
+-- display invoicedtails table with more than just FKs
+SELECT repairID, repairName FROM RepairTypes
+INNER JOIN InvoiceDetails ON RepairTypes.repairID = repairID;
+
 -- colon indicates user input. Added update and delete functions
 
 -- update button is included above
