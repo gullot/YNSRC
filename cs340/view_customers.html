@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>YNSRC</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex, noarchive, nofollow' />
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        nav {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Neighborhood Spaceship Repair Center</h1>
+    </header>
+    <nav class="global">
+        <a href="index.html">Home</a>
+        <a href="view_customers.html">Customers</a>
+        <a href="view_spaceships.html">Spaceships</a>
+        <a href="view_invoices.html">Invoices & Services</a>
+    </nav>
+    <h2>Customers</h2>
+    <table>
+        <tr>
+            <th>customerID</th>
+            <th>customerName</th>
+            <th>telephone</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Regina</td>
+            <td>99-123-456-7890</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>George</td>
+            <td>12-156-184-4452</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Lee</td>
+            <td>55-856-155-4154</td>
+        </tr>
+    </table>
+    <form>
+        <fieldset>
+            <legend>Find customer by:</legend>
+            <select>
+                <option value="customerName" id="customerName" name="customerName">Customer Name</option>
+                <option value="telephone" id="telephone" name="telephone">Telephone</option>
+            </select>
+            <input type="text" id="customerSearch"><br>
+            <input type="submit" value="Search">
+        </fieldset>
+    </form>
+    <form>
+        <fieldset>
+            <legend>Add new customer:</legend>
+            <label for="customerName">Customer Name:</label><br>
+            <input type ="text" id="customerName" name="customerName"><br>
+            <label for="telephone">Telephone:</label><br>
+            <input type="text" id="customerTelephone" name="customerTelephone"><br>
+            <input type="submit" value="Add">
+        </fieldset>
+    </form>
+    <form>
+        <fieldset>
+            <legend>Remove a customer:</legend>
+            <label for="customerName">Customer Name:</label><br>
+            <input type ="text" id="customerName" name="customerName"><br>
+            <label for="telephone">Telephone:</label><br>
+            <input type="text" id="customerTelephone" name="customerTelephone"><br>
+            <input type="submit" value="Remove">
+        </fieldset>
+    </form>
+<footer>
+    <p>&copy; 2023 Seattle Squad OSU CS340</p>
+</footer>
+</body>
+</html>

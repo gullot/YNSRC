@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>YNSRC</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='robots' content='noindex, noarchive, nofollow' />
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        nav {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Neighborhood Spaceship Repair Center</h1>
+    </header>
+    <nav class="global">
+        <a href="index.html">Home</a>
+        <a href="view_customers.html">Customers</a>
+        <a href="view_spaceships.html">Spaceships</a>
+        <a href="view_invoices.html">Invoices & Services</a>
+    </nav>
+    <h2>Spaceships</h2>
+    <table>
+        <tr>
+            <th>spaceshipID</th>
+            <th>customerID</th>
+            <th>spaceshipMake</th>
+            <th>spaceshipModel</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>3</td>
+            <td>Toyoda</td>
+            <td>Spamry</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>3</td>
+            <td>Jonda</td>
+            <td>Spinsight</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>Fjord</td>
+            <td>Fjocus</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>1</td>
+            <td>Starwagon</td>
+            <td>StarRabbit</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>1</td>
+            <td>Toyoda</td>
+            <td>Spamry</td>
+        </tr>
+    </table>
+    <form>
+        <fieldset>
+            <legend>Find spaceship by:</legend>
+            <select>
+                <option value="spaceshipOwner" id="spaceshipOwner" name="spaceshipOwner">Spaceship Owner</option>
+                <option value="spaceshipMake" id="spaceshipMake" name="spaceshipMake">Spaceship Make</option>
+                <option value="spaceshipModel" id="spaceshipModel" name="spaceshipModel">Spaceship Model</option>
+            </select>
+            <input type="text" id="spaceshipSearch"><br>
+            <input type="submit" value="Search">
+        </fieldset>
+    </form>
+    <form>
+        <fieldset>
+            <legend>Add new spaceship:</legend>
+            <label for="customerName">Owner</label><br>
+            <select>
+                <option>Regina</option>
+                <option>George</option>
+                <option>Lee</option>
+            </select><br>
+            <label for="spaceshipMake">Spaceship Make</label><br>
+            <input type="text" id="spaceshipMake" name="spaceshipMake"><br>
+            <label for="spaceshipModel">Spaceship Model</label><br>
+            <input type="text" id="spaceshipModel" name="spaceshipModel"><br>
+            <input type="submit" value="Add">
+        </fieldset>
+    </form>
+<footer>
+    <p>&copy; 2023 Seattle Squad OSU CS340</p>
+</footer>
+</body>
+</html>
