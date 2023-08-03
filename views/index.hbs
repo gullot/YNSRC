@@ -3,7 +3,7 @@
 <p>If you see this text, the server is <strong>definitely</strong> working!</p>
 
 {{!-- Create a table --}}
-<table>
+<table id="customer-table">
 
     {{!-- Header section --}}
     <thead>
@@ -32,3 +32,19 @@
         {{/each}}
     </tbody>
 </table>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new customer, please enter their information below and click 'Submit'!</p>
+<form id="add-customer-form-ajax">
+    <label for="input-customerName">Name: </label>
+    <input type="text" name="input-customerName" id="input-customerName">
+    
+    <label for="input-telephone">Telephone: </label>
+    <input type="text" name="input-telephone" id="input-telephone">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_customer.js"></script>
