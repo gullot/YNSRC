@@ -1,0 +1,47 @@
+<header>
+    <h1>Your Neighborhood Spaceship Repair Center</h1>
+</header>
+<table id="invoicedetails-table">
+
+        {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>
+                Edit
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the attributes --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.invoiceID}}</td>
+            <td>{{this.repairID}}</td>
+            <td>{{this.customerName}}</td>
+            <td>{{this.spaceshipID}}</td>
+            <td>{{this.cost}}</td>
+            <td>{{this.repairName}}</td>
+            <td>{{this.repairCost}}</td>
+            <td><input type="submit" value="edit"></td>
+            <td><input type="submit" value="delete"></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<footer>
+    <p>&copy; 2023 Seattle Squad OSU CS340</p>
+</footer>

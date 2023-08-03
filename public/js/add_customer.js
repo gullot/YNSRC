@@ -68,16 +68,35 @@ addRowToTable = (data) => {
     let customerNameCell = document.createElement("TD");
     let telephoneCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.customerID;
     customerNameCell.innerText = newRow.customerName;
     telephoneCell.innerText = newRow.telephone;
 
+    deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    deleteButton.onClick = function(){
+        deleteCustomer(newRow.id);
+    };
+
+    deleteCell.appendChild(deleteButton);
+
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(customerNameCell);
     row.appendChild(telephoneCell);
+    row.appendChild(deleteCell);
     
+    row.setAttribute('data-value', newRow.id);
+
     // Add the row to the table
     currentTable.appendChild(row);
+
+    let selectMenu = document.getElementById("input-customerName-update");
+    let option = document.createElement("option");
+    option.text = newRow.customerName;
+    option.value = newRow.id;
+    selectMenu.add(option);
 }

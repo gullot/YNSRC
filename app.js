@@ -32,7 +32,62 @@ app.get('/', function(req, res)
             })
                           
     });    
+
 // app.js - ROUTES section
+app.get('/view_customers', function(req, res)
+    {
+        let query1= "SELECT * FROM Customers";
+
+        db.pool.query(query1, function(error, rows, fields){
+
+            res.render('view_customers', {data:rows});
+
+        })
+    });
+
+app.get('/view_spaceships', function(req, res)
+    {
+        let query1= "SELECT * FROM Spaceships";
+
+        db.pool.query(query1, function(error, rows, fields){
+            
+            res.render('view_spaceships', {data:rows});
+
+        })
+    });
+
+app.get('/view_invoices', function(req, res)
+    {
+        let query1= "SELECT * FROM Invoices";
+
+        db.pool.query(query1, function(error, rows, fields){
+            
+            res.render('view_invoices', {data:rows});
+
+        })
+    });
+
+app.get('/view_services', function(req, res)
+    {
+        let query1= "SELECT * FROM RepairTypes";
+
+        db.pool.query(query1, function(error, rows, fields){
+
+            res.render('view_services', {data:rows});
+
+        })
+    });
+
+app.get('/view_invoicedetails', function(req, res)
+    {
+        let query1= "SELECT InvoiceDetails.invoiceID, InvoiceDetails.repairID, Customers.customerName, Spaceships.spaceshipID, Invoices.cost, RepairTypes.repairName, RepairTypes.cost AS repairCost FROM InvoiceDetails INNER JOIN Invoices ON Invoices.invoiceID = InvoiceDetails.invoiceID INNER JOIN RepairTypes ON RepairTypes.repairID = InvoiceDetails.repairID INNER JOIN Spaceships ON Spaceships.spaceshipID = Invoices.spaceshipID INNER JOIN Customers ON Customers.customerID = Spaceships.customerID"
+
+        db.pool.query(query1, function(error, rows, fields){
+
+            res.render('view_invoicedetails', {data:rows});
+
+        })
+    });
 
 app.post('/add-customer-ajax', function(req, res) 
 {
@@ -60,13 +115,13 @@ app.post('/add-customer-ajax', function(req, res)
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
+            console.log(error);
             res.sendStatus(400);
         }
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = `SELECT * FROM Customers;`;
+            query2 = `SELECT * FROM Customers`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -86,11 +141,50 @@ app.post('/add-customer-ajax', function(req, res)
     })
 });
     
+app.delete('/delete-customer-ajax/', function(req,res,next){
+    let data = req.body;
+    let customerID = parseInt(data.id);
+    let deleteCustomers = 'DELETE FROM Customers WHERE customerID = ?';
 
+    db.pool.query(deleteCustomers, [customerID], function(error, rows, fields){
+        if (error) {
+
+            console.log(error);
+            res.sendStatus(400);
+
+        }
+        else {
+            res.sendStatus(204);
+        }
+    })
+});
+
+app.put('/put-customer-ajax', function(req, res, next) {
+    let data = req.body;
+    let customerIDValue = data.customerIDValue;
+    let telephone = data.telephone;
+    console.log("cocky cock");
+    console.log(data);
+    let queryUpdateTelephone = `UPDATE Customers SET telephone = '${telephone}' WHERE customerID = '${customerIDValue}'`;
+    console.log(queryUpdateTelephone);
+    db.pool.query(queryUpdateTelephone, function(error, rows, fields){
+        if (error) {
+
+            console.log(error);
+            res.sendStatus(400);
+
+        }
+        else {
+            console.log("query sent with no error");
+            console.log(rows);
+            res.send(rows);
+        }
+    }  
+)});
 
 /*
     LISTENER
 */
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
-    console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
+    console.log('Express started on http://flip1.engr.oregonstate.edu/:' + PORT + '; press Ctrl-C to terminate.')
 });

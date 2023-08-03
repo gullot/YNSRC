@@ -1,0 +1,82 @@
+<header>
+    <h1>Your Neighborhood Spaceship Repair Center</h1>
+</header>
+<h2>Customers</h2>
+    <table id="customer-table">
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+                <th>
+                    Delete
+                </th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the attributes --}}
+            {{#each data}}
+            <tr data-value={{this.customerID}}>
+                <td>{{this.customerID}}</td>
+                <td>{{this.customerName}}</td>
+                <td>{{this.telephone}}</td>
+                <td><button onClick="deleteCustomer({{this.customerID}})">Delete</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <form id="add-customer-form-ajax">
+        <fieldset>
+            <legend>Add a new customer: </legend>
+            <label for="input-customerName">Name: </label>
+            <input type="text" name="input-customerName" id="input-customerName" required>
+            <label for="input-telephone">Telephone: </label>
+            <input type="text" name="input-telephone" id="input-telephone">
+
+            <input type="submit">
+        </fieldset>
+    </form>
+    <form id="update-customer-form-ajax">
+        <fieldset>
+            <legend>Update a customer: </legend>
+            <label for="input-customerName">Name: </label>
+            <select name="input-customerName-update" id="input-customerName-update">
+                <option value="test">Select a Customer</option>
+                {{#each data}}
+                <option value = "{{this.customerID}}">{{this.customerName}}</option>
+                {{/each}}
+            </select>
+            <label for="input-telephone">Telephone: </label>
+            <input type="text" name="input-telephone-update" id="input-telephone-update">
+            
+            <input type="submit">
+        </fieldset>
+    </form>
+    <form>
+        <fieldset>
+            <legend>Find customer by:</legend>
+            <select>
+                <option value="customerName" id="customerName" name="customerName">Customer Name</option>
+                <option value="telephone" id="telephone" name="telephone">Telephone</option>
+            </select>
+            <input type="text" id="customerSearch"><br>
+            <input type="submit" value="Search">
+        </fieldset>
+    </form>
+<footer>
+    <p>&copy; 2023 Seattle Squad OSU CS340</p>
+</footer>
+
+<script src="./js/add_customer.js"></script>
+<script src="./js/delete_customer.js"></script>
+<script src="./js/update_customer.js"></script>
