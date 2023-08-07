@@ -44,22 +44,28 @@
             <input type="submit" value="Search">
         </fieldset>
     </form>
-    <form>
+
+    <form id="add-spaceship-form-ajax">
         <fieldset>
             <legend>Add new spaceship:</legend>
-            <label for="customerName">Owner</label><br>
-            <select>
-                <option>Regina</option>
-                <option>George</option>
-                <option>Lee</option>
+            <label for="input-owner">Owner</label><br>
+            <select name="input-owner" id="input-owner">
+                <option value="test">Select a Customer</option>
+                {{!can't get customerName working}}
+                {{#each data}}
+                <option value = "{{this.customerID}}">{{this.customerID}}</option>
+                {{/each}}
             </select><br>
-            <label for="spaceshipMake">Spaceship Make</label><br>
-            <input type="text" id="spaceshipMake" name="spaceshipMake"><br>
-            <label for="spaceshipModel">Spaceship Model</label><br>
-            <input type="text" id="spaceshipModel" name="spaceshipModel"><br>
+            <label for="input-make">Spaceship Make</label><br>
+            <input type="text" id="input-make" name="input-make"><br>
+            <label for="input-model">Spaceship Model</label><br>
+            <input type="text" id="input-model" name="input-model"><br>
             <input type="submit" value="Add">
         </fieldset>
     </form>
+    
 <footer>
     <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>
+
+<script src="./js/add_spaceship.js"></script>
