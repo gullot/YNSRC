@@ -13,10 +13,12 @@ updateCustomerForm.addEventListener("submit", function (e) {
     console.log("customer ID: " + customerIDValue);
     console.log("telephone: " + telephoneValue);
 
-    if (isNaN(telephoneValue))
+    //removing this, becuase phone numbers can have dashes in them.
+    /*if (isNaN(telephoneValue))
     {
+        console.log("telephone entry is not a number, try again!")
         return;
-    }
+    }*/
 
     let data = {
         customerIDValue: customerIDValue,

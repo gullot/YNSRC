@@ -24,27 +24,15 @@
             {{!-- For each row, print the attributes --}}
             {{#each data}}
             <tr>
-                <td>{{this.spaceshipID}}</td>
-                <td>{{this.spaceshipMake}}</td>
-                <td>{{this.spaceshipModel}}</td>
+                <td>{{this.ID}}</td>
+                <td>{{this.Make}}</td>
+                <td>{{this.Model}}</td>
                 <td>{{this.customerID}}</td>
+                <td>{{this.customerName}}</td>
             </tr>
             {{/each}}
         </tbody>
     </table>
-
-    {{!<form>     removing search bar
-        <fieldset>
-            <legend>Find spaceship by:</legend>
-            <select>
-                <option value="spaceshipOwner" id="spaceshipOwner" name="spaceshipOwner">Spaceship Owner</option>
-                <option value="spaceshipMake" id="spaceshipMake" name="spaceshipMake">Spaceship Make</option>
-                <option value="spaceshipModel" id="spaceshipModel" name="spaceshipModel">Spaceship Model</option>
-            </select>
-            <input type="text" id="spaceshipSearch"><br>
-            <input type="submit" value="Search">
-        </fieldset>
-    </form>}}
 
     <form id="add-spaceship-form-ajax">
         <fieldset>

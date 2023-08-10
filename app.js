@@ -47,7 +47,7 @@ app.get('/view_customers', function(req, res)
 
 app.get('/view_spaceships', function(req, res)
     {
-        let query1= "SELECT * FROM Spaceships";
+        let query1= "SELECT spaceshipID AS ID, spaceshipMake AS Make, spaceshipModel AS Model, customerID FROM Spaceships";
 
         //to get the names of the customers for the drop down for add_customer
         let query2 = "SELECT * FROM Customers";
@@ -68,16 +68,12 @@ app.get('/view_spaceships', function(req, res)
 
                 //appending the spaceships table with the customer name as well
                 spaceships = spaceships.map(ship => {
-                    return Object.assign(ship, {customerName: customerMap[ship.customerName]})
+                    return Object.assign(ship, {customerName: customerMap[ship.customerID]})
                 })
-                //let table = document.getElememtById("spaceship-table");
-                //for (let i=0, row; row = table.rows[i]; i++) {
-                //    if (table.rows[i])
-                //}
-                //spaceships.
-                console.log(customers);
-                console.log(customerMap);
-                console.log(spaceships);
+
+                //console.log(customers);
+                //console.log(customerMap);
+                //console.log(spaceships);
 
                 return res.render('view_spaceships', {data: spaceships, customers: customers});
             })
