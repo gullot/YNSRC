@@ -15,7 +15,7 @@
 --
 
 CREATE TABLE `Customers` (
-  `CustomerID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `customerID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `customerName` varchar(45) NOT NULL,
   `telephone` varchar(45) NOT NULL
 );

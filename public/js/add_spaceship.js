@@ -71,7 +71,7 @@ addRowToTable = (data) => {
     //console.log(newRow);
 
     // Create a row and cells
-    //let row = document.createElement("TR");
+    let row = document.createElement("TR");
     //let idCell = document.createElement("TD");
     //let makeCell = document.createElement("TD");
     //let modelCell = document.createElement("TD");
