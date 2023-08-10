@@ -49,9 +49,40 @@ app.get('/view_spaceships', function(req, res)
     {
         let query1= "SELECT * FROM Spaceships";
 
+        //to get the names of the customers for the drop down for add_customer
+        let query2 = "SELECT * FROM Customers";
+
         db.pool.query(query1, function(error, rows, fields){
+
+            let spaceships = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+                let customers = rows;
+
+                //making each ID related to the name of the customer
+                let customerMap = {}
+                customers.map(customer => {
+                    let id = parseInt(customer.customerID);
+                    customerMap[id] = customer["customerName"];
+                })
+
+                //appending the spaceships table with the customer name as well
+                spaceships = spaceships.map(ship => {
+                    return Object.assign(ship, {customerName: customerMap[ship.customerName]})
+                })
+                //let table = document.getElememtById("spaceship-table");
+                //for (let i=0, row; row = table.rows[i]; i++) {
+                //    if (table.rows[i])
+                //}
+                //spaceships.
+                console.log(customers);
+                console.log(customerMap);
+                console.log(spaceships);
+
+                return res.render('view_spaceships', {data: spaceships, customers: customers});
+            })
             
-            res.render('view_spaceships', {data:rows});
+            //res.render('view_spaceships', {data:rows});
 
         })
     });

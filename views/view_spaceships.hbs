@@ -32,7 +32,8 @@
             {{/each}}
         </tbody>
     </table>
-    <form>
+
+    {{!<form>     removing search bar
         <fieldset>
             <legend>Find spaceship by:</legend>
             <select>
@@ -43,7 +44,7 @@
             <input type="text" id="spaceshipSearch"><br>
             <input type="submit" value="Search">
         </fieldset>
-    </form>
+    </form>}}
 
     <form id="add-spaceship-form-ajax">
         <fieldset>
@@ -51,9 +52,8 @@
             <label for="input-owner">Owner</label><br>
             <select name="input-owner" id="input-owner">
                 <option value="test">Select a Customer</option>
-                {{!can't get customerName working}}
-                {{#each data}}
-                <option value = "{{this.customerID}}">{{this.customerID}}</option>
+                {{#each customers}}
+                <option value = "{{this.customerID}}">{{this.customerName}}</option>
                 {{/each}}
             </select><br>
             <label for="input-make">Spaceship Make</label><br>

@@ -92,9 +92,9 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
-    let selectMenu = document.getElementById("input-spaceship-add");
-    let option = document.createElement("option");
-    option.text = newRow.spaceshipID;
-    option.value = newRow.id;
-    selectMenu.add(option);
+    //let selectMenu = document.getElementById("input-spaceship-add");
+    //let option = document.createElement("option");
+    //option.text = newRow.spaceshipID;
+    //option.value = newRow.id;
+    //selectMenu.add(option);
 }
