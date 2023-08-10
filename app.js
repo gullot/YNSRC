@@ -36,7 +36,7 @@ app.get('/', function(req, res)
 // app.js - ROUTES section
 app.get('/view_customers', function(req, res)
     {
-        let query1= "SELECT * FROM Customers";
+        let query1= "SELECT customerID AS ID, customerName AS Name, telephone AS Telephone FROM Customers";
 
         db.pool.query(query1, function(error, rows, fields){
 

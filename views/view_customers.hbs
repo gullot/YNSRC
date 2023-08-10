@@ -25,12 +25,13 @@
         <tbody>
 
             {{!-- For each row, print the attributes --}}
+            {{!changed table name with AS in query on app.js, reflected here}}
             {{#each data}}
-            <tr data-value={{this.customerID}}>
-                <td>{{this.customerID}}</td>
-                <td>{{this.customerName}}</td>
-                <td>{{this.telephone}}</td>
-                <td><button onClick="deleteCustomer({{this.customerID}})">Delete</button></td>
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Telephone}}</td>
+                <td><button onClick="deleteCustomer({{this.ID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -53,7 +54,7 @@
             <select name="input-customerName-update" id="input-customerName-update">
                 <option value="test">Select a Customer</option>
                 {{#each data}}
-                <option value = "{{this.customerID}}">{{this.customerName}}</option>
+                <option value = "{{this.ID}}">{{this.Name}}</option>
                 {{/each}}
             </select>
             <label for="input-telephone">Telephone: </label>
@@ -62,7 +63,7 @@
             <input type="submit">
         </fieldset>
     </form>
-    <form>
+    {{!<form>   get rid of search
         <fieldset>
             <legend>Find customer by:</legend>
             <select>
@@ -72,7 +73,7 @@
             <input type="text" id="customerSearch"><br>
             <input type="submit" value="Search">
         </fieldset>
-    </form>
+    </form>}}
 <footer>
     <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>

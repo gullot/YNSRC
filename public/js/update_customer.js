@@ -23,6 +23,8 @@ updateCustomerForm.addEventListener("submit", function (e) {
         telephone: telephoneValue,
     };
 
+    console.log(data);
+
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-customer-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -31,6 +33,9 @@ updateCustomerForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             
             updateRow(telephoneValue, customerIDValue);
+            //reset fields
+            inputCustomerID.value = '';
+            inputTelephone.value = '';
 
         }
         else if (xhttp.readyState == 4 && xhttp.staus != 200) {
