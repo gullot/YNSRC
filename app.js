@@ -96,7 +96,7 @@ app.get('/view_invoices', function(req, res)
 
 app.get('/view_services', function(req, res)
     {
-        let query1= "SELECT * FROM RepairTypes";
+        let query1= "SELECT repairID AS ID, repairName AS Repair, cost AS Cost FROM RepairTypes";
 
         db.pool.query(query1, function(error, rows, fields){
 
@@ -207,13 +207,73 @@ app.post('/add-spaceship-ajax', function(req, res)
         }
     })
 });
+
+app.post('/add-repair-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    //console.log(data.owner);
+
+    // Create the query and run it on the database (data.owner)?????
+    query1 = `INSERT INTO RepairTypes (repairName, cost) VALUES ('${data.repairName}', '${data.cost}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on repairtypes
+            query2 = `SELECT * FROM RepairTypes`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
     
 app.delete('/delete-customer-ajax/', function(req,res,next){
     let data = req.body;
+    console.log(data);
     let customerID = parseInt(data.id);
     let deleteCustomers = 'DELETE FROM Customers WHERE customerID = ?';
 
     db.pool.query(deleteCustomers, [customerID], function(error, rows, fields){
+        if (error) {
+
+            console.log(error);
+            res.sendStatus(400);
+
+        }
+        else {
+            res.sendStatus(204);
+        }
+    })
+});
+
+app.delete('/delete-repair-ajax/', function(req,res,next){
+    let data = req.body;
+    console.log(data);
+    let repairID = parseInt(data.repairID);
+    let deleteRepairs = 'DELETE FROM RepairTypes WHERE repairID = ?';
+
+    db.pool.query(deleteRepairs, [repairID], function(error, rows, fields){
         if (error) {
 
             console.log(error);

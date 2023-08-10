@@ -90,8 +90,8 @@ addRowToTable = (data) => {
     //row.appendChild(makeCell);
     //row.appendChild(modelCell);
     //row.appendChild(ownerCell);
-    
-    row.setAttribute('data-value', newRow.id);
+    console.log(newRow);
+    row.setAttribute('data-value', newRow.spaceshipID);
 
     // Add the row to the table
     //currentTable.appendChild(row);

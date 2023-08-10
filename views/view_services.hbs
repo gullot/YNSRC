@@ -16,9 +16,6 @@
             </th>
             {{/each}}
             <th>
-                Edit
-            </th>
-            <th>
                 Delete
             </th>
         </tr>
@@ -30,15 +27,29 @@
         {{!-- For each row, print the attributes --}}
         {{#each data}}
         <tr>
-            <td>{{this.repairID}}</td>
-            <td>{{this.repairName}}</td>
-            <td>{{this.cost}}</td>
-            <td><input type="submit" value="edit"></td>
-            <td><input type="submit" value="delete"></td>
+            <td>{{this.ID}}</td>
+            <td>{{this.Repair}}</td>
+            <td>${{this.Cost}}</td>
+            <td><button onClick="deleteRepair({{this.ID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<form id="add-repair-form-ajax">
+        <fieldset>
+            <legend>Add a new repair: </legend>
+            <label for="input-repairName">Name: </label>
+            <input type="text" name="input-repairName" id="input-repairName" required>
+            <label for="input-cost">Cost: </label>
+            <input type="number" min="0.00" step="0.01" name="input-cost" id="input-cost">
+            <input type="submit">
+        </fieldset>
+    </form>
+
 <footer>
     <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>
+
+<script src="./js/add_repair.js"></script>
+<script src="./js/delete_repair.js"></script>

@@ -74,28 +74,41 @@ addRowToTable = (data) => {
     customerNameCell.innerText = newRow.customerName;
     telephoneCell.innerText = newRow.telephone;
 
-    deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "Delete";
-    deleteButton.onClick = function(){
-        deleteCustomer(newRow.id);
+    //// adds delete button for this cell based on customerID
+    //let deleteButton = document.createElement("button");
+    //deleteButton.innerHTML = "Delete";
+    //deleteButton.onClick = function(){
+    //    deleteCustomer(newRow.customerID);
+    //};
+
+    
+    // https://stackoverflow.com/questions/15315315/how-do-i-add-a-button-to-a-td-using-js
+    let btn = document.createElement('input');
+    btn.type = "button";
+    btn.id = newRow.customerID
+    btn.className = "btn";
+    btn.value = "Delete";
+    btn.onclick = function(){
+        deleteCustomer(newRow.customerID);
     };
 
-    deleteCell.appendChild(deleteButton);
+    //deleteCell.appendChild(deleteButton);
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(customerNameCell);
     row.appendChild(telephoneCell);
-    row.appendChild(deleteCell);
+    row.appendChild(btn);
     
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.customerID);
 
     // Add the row to the table
     currentTable.appendChild(row);
 
+    //adds the newly added row to the dynamic drop down on page for update
     let selectMenu = document.getElementById("input-customerName-update");
     let option = document.createElement("option");
     option.text = newRow.customerName;
-    option.value = newRow.id;
+    option.value = newRow.customerID;
     selectMenu.add(option);
 }
