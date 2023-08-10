@@ -10,12 +10,10 @@ addRepairForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let inputRepairName = document.getElementById("input-repairName");
     let inputCost = document.getElementById("input-cost");
-    console.log(inputCost);
 
     // Get the values from the form fields
     let repairNameValue = inputRepairName.value;
     let costValue = inputCost.value;
-    console.log(costValue);
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -23,7 +21,7 @@ addRepairForm.addEventListener("submit", function (e) {
         cost: costValue
     }
     
-    console.log(data);
+    //console.log(data);
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -54,7 +52,7 @@ addRepairForm.addEventListener("submit", function (e) {
 
 // Creates a single row from an Object representing a single record
 addRowToTable = (data) => {
-    //location.reload();
+    //location.reload(); this works, but defeats the purpose of async updating
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("services-table");
 
@@ -64,9 +62,8 @@ addRowToTable = (data) => {
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
-    console.log(newRow);
 
-    // Create a row and 3 cells
+    // Create a row and cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let repairNameCell = document.createElement("TD");
@@ -76,11 +73,15 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.repairID;
     repairNameCell.innerText = newRow.repairName;
-    costCell.innerText = newRow.cost;
+    costCell.innerText = newRow.cost.toLocaleString('en-us', {style: 'currency', currency: 'USD'});
 
-    deleteCell = document.createElement("button");
-    deleteCell.innerHTML = "Delete";
-    deleteCell.onClick = function(){
+    // https://stackoverflow.com/questions/15315315/how-do-i-add-a-button-to-a-td-using-js
+    let btn = document.createElement('input');
+    btn.type = "button";
+    btn.id = newRow.repairID
+    btn.className = "btn";
+    btn.value = "Delete";
+    btn.onclick = function(){
         deleteRepair(newRow.repairID);
     };
 
@@ -90,17 +91,12 @@ addRowToTable = (data) => {
     row.appendChild(idCell);
     row.appendChild(repairNameCell);
     row.appendChild(costCell);
-    row.appendChild(deleteCell);
+    row.appendChild(btn);
     
     row.setAttribute('data-value', newRow.repairID);
-    console.log(row);
+    //console.log(row);
 
     // Add the row to the table
     currentTable.appendChild(row);
 
-    //let selectMenu = document.getElementById("input-repairName-update");
-    //let option = document.createElement("option");
-    //option.text = newRow.customerName;
-    //option.value = newRow.id;
-    //selectMenu.add(option);
 }

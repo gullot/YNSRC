@@ -61,7 +61,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 3 cells
+    // Create a row and cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let customerNameCell = document.createElement("TD");
@@ -75,7 +75,8 @@ addRowToTable = (data) => {
     telephoneCell.innerText = newRow.telephone;
 
     //// adds delete button for this cell based on customerID
-    //let deleteButton = document.createElement("button");
+    //let deleteButton = document.createElement("input");
+    //deleteButton.type = "button";
     //deleteButton.innerHTML = "Delete";
     //deleteButton.onClick = function(){
     //    deleteCustomer(newRow.customerID);

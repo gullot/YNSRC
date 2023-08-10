@@ -23,7 +23,7 @@
 
             {{!-- For each row, print the attributes --}}
             {{#each data}}
-            <tr>
+            <tr data-value={{this.ID}}>
                 <td>{{this.ID}}</td>
                 <td>{{this.Make}}</td>
                 <td>{{this.Model}}</td>

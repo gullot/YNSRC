@@ -26,10 +26,10 @@
 
         {{!-- For each row, print the attributes --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.ID}}>
             <td>{{this.ID}}</td>
             <td>{{this.Repair}}</td>
-            <td>${{this.Cost}}</td>
+            <td>${{this.Cost}}.00</td>
             <td><button onClick="deleteRepair({{this.ID}})">Delete</button></td>
         </tr>
         {{/each}}

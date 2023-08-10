@@ -270,7 +270,7 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
 app.delete('/delete-repair-ajax/', function(req,res,next){
     let data = req.body;
     console.log(data);
-    let repairID = parseInt(data.repairID);
+    let repairID = parseInt(data.id);
     let deleteRepairs = 'DELETE FROM RepairTypes WHERE repairID = ?';
 
     db.pool.query(deleteRepairs, [repairID], function(error, rows, fields){

@@ -3,7 +3,7 @@ function deleteRepair(repairID) {
         id: repairID
     };
 
-    console.log(data);
+    //console.log(data);
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "/delete-repair-ajax", true);
@@ -19,7 +19,6 @@ function deleteRepair(repairID) {
         }
     }
     xhttp.send(JSON.stringify(data));
-    location.reload();
 };
 
 function deleteRow(repairID){
