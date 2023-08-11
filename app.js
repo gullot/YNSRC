@@ -5,7 +5,7 @@ var app     = express();            // We need to instantiate an express object 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 61288;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 61287;                 // Set a port number at the top so it's easy to change in the future
 
 // handlebars stuff
 const { engine } = require('express-handlebars');
@@ -85,7 +85,7 @@ app.get('/view_spaceships', function(req, res)
 
 app.get('/view_invoices', function(req, res)
     {
-        let query1= "SELECT * FROM Invoices";
+        let query1= "SELECT invoiceID AS ID, cost AS Cost, spaceshipID AS spaceshipID FROM Invoices";
 
         let query2= "SELECT * FROM RepairTypes";
 
@@ -258,6 +258,7 @@ app.post('/add-repair-ajax', function(req, res)
             })
         }
     })
+    console.log("I can do more stuff");
 });
     
 app.delete('/delete-customer-ajax/', function(req,res,next){
@@ -305,22 +306,39 @@ app.put('/put-customer-ajax', function(req, res, next) {
     let queryUpdateTelephone = `UPDATE Customers SET telephone = '${telephone}' WHERE customerID = '${customerIDValue}'`;
     db.pool.query(queryUpdateTelephone, function(error, rows, fields){
         if (error) {
+            console.log(error);
             res.sendStatus(400);
         }
         else {
+            console.log(rows);
             res.send(rows);
         }
     }  
 )});
 
-app.put('/add-invoice-ajax', function(req, res, next) {
+app.post('/add-invoice-ajax', function(req, res) {
     let data = req.body;
-    let spaceshipOwner = data.owner;
-    let spaceshipModel = data.model;
-    let cost = data.cost;
     let repairServices = data.repairServices;
-    query1 = `INSERT INTO Invoices (cost, spaceshipID) VALUES ('${cost}', (SELECT spaceshipID FROM Spaceships WHERE spaceshipModel = ${spaceshipModel} AND customerID = (SELECT customerID FROM Customers WHERE customerName = '${spaceshipOwner}')))`;
-})
+    query1 = `INSERT INTO Invoices (cost, spaceshipID) VALUES ('${data.cost}', (SELECT spaceshipID FROM Spaceships WHERE spaceshipModel = '${data.model}' AND customerID = (SELECT customerID FROM Customers WHERE customerName = '${data.owner}')))`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        if(error) {
+            res.sendStatus(400);
+        }
+        else {
+
+            query2 = `SELECT * FROM Invoices`
+
+            db.pool.query(query2, function(error, rows, fields){
+                if(error) {
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    }
+)});
 /*
     LISTENER
 */

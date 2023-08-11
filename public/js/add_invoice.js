@@ -17,12 +17,11 @@ addCustomerForm.addEventListener("submit", function (e) {
     let repairServices = []
     for (var i=0; inputRepairServices[i]; i++){
         if(inputRepairServices[i].checked){
-            cost += inputRepairServices[i].value;
-            repairServices.append(inputRepairServices[i].id);
+            console.log(inputRepairServices[i].id);
+            cost += parseInt(inputRepairServices[i].value);
+            repairServices.push(inputRepairServices[i].id);
         }
     }
-    console.log(cost);
-    console.log(repairServices);
 
     // Get the values from the form fields
     let spaceshipOwnerValue = inputSpaceshipOwner.value;
@@ -60,18 +59,17 @@ addCustomerForm.addEventListener("submit", function (e) {
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
+            alert(`No spaceship model of type ${data.model} owned by ${data.owner}. Please double check and try again!`);
         }
     }
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-
 })
 
 
 // Creates a single row from an Object representing a single record from Invoices
 addRowToTable = (data) => {
-
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("invoices-table");
 
@@ -106,8 +104,8 @@ addRowToTable = (data) => {
 
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(customerNameCell);
-    row.appendChild(telephoneCell);
+    row.appendChild(costCell);
+    row.appendChild(spaceshipIDCell);
     row.appendChild(deleteCell);
     
     row.setAttribute('data-value', newRow.id);

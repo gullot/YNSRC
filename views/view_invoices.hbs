@@ -27,10 +27,10 @@
         {{!-- For each row, print the attributes --}}
         {{#each data}}
         <tr>
-            <td>{{this.invoiceID}}</td>
-            <td>{{this.cost}}</td>
+            <td>{{this.ID}}</td>
+            <td>{{this.Cost}}</td>
             <td>{{this.spaceshipID}}</td>
-            <td><input type="submit" value="delete"></td>
+            <td><input type="submit" value="Delete"></td>
         </tr>
         {{/each}}
     </tbody>
@@ -46,8 +46,8 @@
             <label for="input-services">Repair Services: </label>
             {{#each services}}
             <div>
-            <input type="checkbox" name={{this.repairName}} id={{this.repairName}} value={{this.cost}} class="service-checkbox">
-            <label for={{this.repairName}}>{{this.repairName}}</label>
+            <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}" value={{this.cost}} class="service-checkbox">
+            <label for="{{this.repairName}}">{{this.repairName}}</label>
             </div>
             {{/each}}
             <br>
