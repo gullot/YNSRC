@@ -2,141 +2,60 @@
     <h1>Your Neighborhood Spaceship Repair Center</h1>
 </header>
 <h2>Invoices</h2>
-<table id="invoice-table">
-    <tr>
-        <th>invoiceID</th>
-        <th>cost</th>
-        <th>spaceshipID</th>
-        <th>delete</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>85</td>
-        <td>2</td>
-        <td><input type="submit" value="delete"></td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>95</td>
-        <td>3</td>
-        <td><input type="submit" value="delete"></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>30</td>
-        <td>5</td>
-        <td><input type="submit" value="delete"></td>
-    </tr>
-</table>
-<form>
-    <fieldset>
-        <legend>Find invoices by:</legend>
-        <select>
-            <option value="cost" id="cost" name="cost">Cost</option>
-            <option value="spaceshipModel" id="spaceshipModel" name="spaceshipModel">Spaceship Model</option>
-            <option value="owner" id="owner" name="owner">Spaceship Owner</option>
-        </select>
-        <input type="text" id="invoiceSearch"><br>
-        <input type="submit" value="Search">
-    </fieldset>
-</form>
-<form>
-    <fieldset>
-        <legend>Add new invoice:</legend>
-        <label for="cost">Cost</label><br>
-        <input type ="text" id="cost" name="cost"><br>
-        <label for="owner">Owner:</label><br>
-        <input type="text" id="owner" name="owner"><br>
-        <label for="spaceshipModel" id="spaceshipModel" name="spaceshipModel">Spaceship Model</label><br>
-        <input type="text" id="model" name="model"><br>
-        <input type="checkbox" id="Galactic Oil Change" name="Galactic Oil Change" value="Galactic Oil Change">
-        <label for="Galactic Oil Change">Galactic Oil Change</label>
-        <input type="checkbox" id="Spaceshield Replacement" name="Spaceshield Replacement" value="Spaceshield Replacement">
-        <label for="Spaceshield Replacement">Spaceshield Replacement</label>
-        <input type="checkbox" id="Landing Gear Fluid Change" name="Landing Gear Fluid Change" value="Landing Gear Fluid Change">
-        <label for="Landing Gear Fluid Change">Landing Gear Fluid Change</label>
-        <input type="checkbox" id="Muffler Repair" name="Muffler Repair" value="Muffler Repair">
-        <label for="Muffler Repair">Muffler Repair</label><br>
-        <input type="submit" value="Add">
-    </fieldset>
-</form>
-<h2>Repair options</h2>
-<table>
-    <tr>
-        <th>repairID</th>
-        <th>repairName</th>
-        <th>cost</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Galactic Oil Change</td>
-        <td>$35</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>Spaceshield Replacement</td>
-        <td>$50</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Landing Gear Fluid Change</td>
-        <td>$45</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>Muffler Repair</td>
-        <td>$30</td>
-    </tr>
-</table>
-<form>
-    <fieldset>
-        <legend>Add new repair option:</legend>
-        <label for="repairName">Repair Name:</label><br>
-        <input type="text" id="repairName" name="repairName"><br>
-        <label for="cost">Cost ($)</label><br>
-        <input type="text" id="cost" name="cost"><br>
-        <input type="submit" value="Add">
-    </fieldset>
-</form>
-<h2>Invoice Details</h2>
-<table>
+<table id="invoices-table">
+
+        {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
     <tbody>
+
+        {{!-- For each row, print the attributes --}}
+        {{#each data}}
         <tr>
-            <th>invoiceID</th>
-            <th>repairID</th>
+            <td>{{this.invoiceID}}</td>
+            <td>{{this.cost}}</td>
+            <td>{{this.spaceshipID}}</td>
+            <td><input type="submit" value="delete"></td>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>4</td>
-        </tr>
+        {{/each}}
     </tbody>
 </table>
-<form>
-    <fieldset>
-        <legend>Add new invoice repair relationship</legend>
-        <label for="invoiceID">invoiceID</label><br>
-        <input type="number" id="invoiceID" name="invoiceID" min="1"><br>
-        <label for="repairID">repairID</label><br>
-        <input type="number" id="repairID" name="repairID" min="1"><br>
-        <input type="submit" value="Add">
-    </fieldset>
-</form>
+<form id="add-invoice-form-ajax">
+        <fieldset>
+            <legend>Add a new invoice: </legend>
+            <label for="input-spaceshipOwner">Owner: </label>
+            <input type="text" name="input-spaceshipOwner" id="input-spaceshipOwner" required>
+            <label for="input-spaceshipModel">Model: </label>
+            <input type="text" name="input-spaceshipModel" id="input-spaceshipModel">
+            <br>
+            <label for="input-services">Repair Services: </label>
+            {{#each services}}
+            <div>
+            <input type="checkbox" name={{this.repairName}} id={{this.repairName}} value={{this.cost}} class="service-checkbox">
+            <label for={{this.repairName}}>{{this.repairName}}</label>
+            </div>
+            {{/each}}
+            <br>
+            <input type="submit">
+        </fieldset>
+    </form>
 <footer>
 <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>
+
+<script src="./js/add_invoice.js"></script>

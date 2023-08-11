@@ -60,9 +60,21 @@ app.get('/view_invoices', function(req, res)
     {
         let query1= "SELECT * FROM Invoices";
 
+        let query2= "SELECT * FROM RepairTypes";
+
         db.pool.query(query1, function(error, rows, fields){
+
+            let invoices = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+
+                let services = rows;
+                console.log(services);
+                res.render('view_invoices', {data:invoices, services:services});
+
+            })
             
-            res.render('view_invoices', {data:rows});
+            
 
         })
     });
@@ -163,25 +175,25 @@ app.put('/put-customer-ajax', function(req, res, next) {
     let data = req.body;
     let customerIDValue = data.customerIDValue;
     let telephone = data.telephone;
-    console.log("cocky cock");
-    console.log(data);
     let queryUpdateTelephone = `UPDATE Customers SET telephone = '${telephone}' WHERE customerID = '${customerIDValue}'`;
-    console.log(queryUpdateTelephone);
     db.pool.query(queryUpdateTelephone, function(error, rows, fields){
         if (error) {
-
-            console.log(error);
             res.sendStatus(400);
-
         }
         else {
-            console.log("query sent with no error");
-            console.log(rows);
             res.send(rows);
         }
     }  
 )});
 
+app.put('/add-invoice-ajax', function(req, res, next) {
+    let data = req.body;
+    let spaceshipOwner = data.owner;
+    let spaceshipModel = data.model;
+    let cost = data.cost;
+    let repairServices = data.repairServices;
+    query1 = `INSERT INTO Invoices (cost, spaceshipID) VALUES ('${cost}', (SELECT spaceshipID FROM Spaceships WHERE spaceshipModel = ${spaceshipModel} AND customerID = (SELECT customerID FROM Customers WHERE customerName = '${spaceshipOwner}')))`;
+})
 /*
     LISTENER
 */
