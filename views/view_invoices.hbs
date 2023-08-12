@@ -15,9 +15,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th>
-                Delete
-            </th>
         </tr>
     </thead>
 
@@ -30,7 +27,6 @@
             <td>{{this.ID}}</td>
             <td>{{this.Cost}}</td>
             <td>{{this.spaceshipID}}</td>
-            <td><input type="submit" value="Delete"></td>
         </tr>
         {{/each}}
     </tbody>
@@ -58,19 +54,19 @@
 <form id="update-invoice-form-ajax">
     <fieldset>
         <legend>Update an invoice: </legend>
-        <label for="update-invoiceID">Invoice ID#: </label>
-        <select name="update-invoiceID" id="update-invoiceID">
+        <label for="input-invoiceID-update">Invoice ID#: </label>
+        <select name="input-invoiceID-update" id="input-invoiceID-update">
             <option value="test">Select an invoice</option>
             {{#each data}}
             <option value="{{this.ID}}">{{this.ID}}</option>
             {{/each}}
         </select>
         <br>
-        <label for="input-services">Repair Services: </label>
+        <label for="input-service-update">Repair Services: </label>
         {{#each services}}
         <div>
             <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}" value={{this.cost}}
-                class="service-checkbox">
+                class="service-checkbox-update">
             <label for="{{this.repairName}}">{{this.repairName}}</label>
         </div>
         {{/each}}

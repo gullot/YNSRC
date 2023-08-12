@@ -22,8 +22,6 @@ updateCustomerForm.addEventListener("submit", function (e) {
         telephone: telephoneValue,
     };
 
-    console.log(data);
-
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-customer-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");

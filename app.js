@@ -393,6 +393,44 @@ app.post('/add-invoicedetail-ajax', function (req, res) {
     })
 })
 
+app.put('/put-invoice-ajax', function(req, res, next) {
+    let data = req.body;
+    let invoiceIDValue = data.invoiceIDValue;
+    let repairServices = data.repairServices;
+    let cost = data.cost
+    let queryUpdateInvoice = `UPDATE Invoices SET cost = '${cost}' WHERE invoiceID = '${invoiceIDValue}'`;
+    db.pool.query(queryUpdateTelephone, function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else {
+            let queryFindInvoiceDetails = `SELECT repairName FROM RepairTypes WHERE repair ID = (SELECT repairID FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}')`
+            db.pool.query(queryFindInvoiceDetails, function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else {
+                    let queryResetInvoiceDetails = `DELETE FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}'`
+                    for (var i = 0; repairServices[i]; i++) {
+
+                        for (var j = 0; rows[j], j++;) {
+                            if (rows[j] == repairServices) {
+                                
+                            }
+                        }
+                    }
+                    db.pool.query(queryResetInvoiceDetails, function (error, rows, fields) {
+
+                    })
+                }
+            })
+        }
+    }
+    )
+})
+
 /*
     LISTENER
 */

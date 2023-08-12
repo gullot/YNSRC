@@ -3,7 +3,7 @@ let addCustomerForm = document.getElementById('add-invoice-form-ajax');
 
 // Modify the objects we need
 addCustomerForm.addEventListener("submit", function (e) {
-    
+
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -15,8 +15,8 @@ addCustomerForm.addEventListener("submit", function (e) {
     let inputRepairServices = document.getElementsByClassName('service-checkbox');
     let cost = 0
     let repairServices = []
-    for (var i=0; inputRepairServices[i]; i++){
-        if(inputRepairServices[i].checked){
+    for (var i = 0; inputRepairServices[i]; i++) {
+        if (inputRepairServices[i].checked) {
             cost += parseInt(inputRepairServices[i].value);
             repairServices.push(inputRepairServices[i].id);
         }
@@ -33,7 +33,7 @@ addCustomerForm.addEventListener("submit", function (e) {
         cost: cost,
         repairServices: repairServices
     }
-    
+
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -50,12 +50,12 @@ addCustomerForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             inputSpaceshipOwner.value = '';
             inputSpaceshipModel.value = '';
-            for (var i=0; inputRepairServices[i]; i++){
-                if(inputRepairServices[i].checked){
+            for (var i = 0; inputRepairServices[i]; i++) {
+                if (inputRepairServices[i].checked) {
                     inputRepairServices.checked = false;
                 }
             }
-            
+
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -93,20 +93,11 @@ addRowToTable = (data) => {
     costCell.innerText = newRow.cost;
     spaceshipIDCell.innerText = newRow.spaceshipID;
 
-    deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "Delete";
-    deleteButton.onClick = function(){
-        deleteCustomer(newRow.id);
-    };
-
-    deleteCell.appendChild(deleteButton);
-
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(costCell);
     row.appendChild(spaceshipIDCell);
-    row.appendChild(deleteCell);
-    
+
     row.setAttribute('data-value', newRow.id);
 
     // Add the row to the table
