@@ -17,7 +17,6 @@ addCustomerForm.addEventListener("submit", function (e) {
     let repairServices = []
     for (var i=0; inputRepairServices[i]; i++){
         if(inputRepairServices[i].checked){
-            console.log(inputRepairServices[i].id);
             cost += parseInt(inputRepairServices[i].value);
             repairServices.push(inputRepairServices[i].id);
         }
@@ -32,9 +31,10 @@ addCustomerForm.addEventListener("submit", function (e) {
         owner: spaceshipOwnerValue,
         model: spaceshipModelValue,
         cost: cost,
-        repairServices, repairServices
+        repairServices: repairServices
     }
     
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-invoice-ajax", true);
@@ -78,8 +78,7 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
-    console.log(newRow)
+    let newRow = parsedData[parsedData.length - 1];
 
     // Create a row and 3 cells
     let row = document.createElement("TR");
