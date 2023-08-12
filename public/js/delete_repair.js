@@ -21,7 +21,7 @@ function deleteRepair(repairID) {
     xhttp.send(JSON.stringify(data));
 };
 
-function deleteRow(repairID){
+function deleteRow(repairID) {
     let table = document.getElementById("services-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {

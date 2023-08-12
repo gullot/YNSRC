@@ -4,7 +4,7 @@
 <h2>Invoice Details</h2>
 <table id="invoicedetails-table">
 
-        {{!-- Header section --}}
+    {{!-- Header section --}}
     <thead>
 
         {{!-- For just the first row, we print each key of the row object as a header cell so we
@@ -36,30 +36,30 @@
     </tbody>
 </table>
 <form id="add-invoicedetail-form-ajax">
-        <fieldset>
-            <legend>Add a new invoice-service relationship: </legend>
-            <label for="input-invoiceID">Invoice ID#: </label>
-            <select name="input-invoiceID" id="input-invoiceID">
-                <option value="test">Select an invoice</option>
-                {{#each invoices}}
-                <option value = "{{this.invoiceID}}">{{this.invoiceID}}</option>
-                {{/each}}
-            </select>
-            <br>
-            <label for="input-services">Repair Services: </label>
-            {{#each services}}
-            <div>
+    <fieldset>
+        <legend>Add a new invoice-service relationship: </legend>
+        <label for="input-invoiceID">Invoice ID#: </label>
+        <select name="input-invoiceID" id="input-invoiceID">
+            <option value="test">Select an invoice</option>
+            {{#each invoices}}
+            <option value="{{this.invoiceID}}">{{this.invoiceID}}</option>
+            {{/each}}
+        </select>
+        <br>
+        <label for="input-services">Repair Services: </label>
+        {{#each services}}
+        <div>
             <input type="radio" name="service" id="{{this.repairID}}" value={{this.cost}} class="service-radio">
             <label for="{{this.repairName}}">{{this.repairName}}</label>
-            </div>
-            {{/each}}
-            <br>
-            <input type="submit" value="Add">
-        </fieldset>
-    </form>
+        </div>
+        {{/each}}
+        <br>
+        <input type="submit" value="Add">
+    </fieldset>
+</form>
 <footer>
-<footer>
-    <p>&copy; 2023 Seattle Squad OSU CS340</p>
-</footer>
+    <footer>
+        <p>&copy; 2023 Seattle Squad OSU CS340</p>
+    </footer>
 
-<script src="./js/add_invoicedetail.js"></script>
+    <script src="./js/add_invoicedetail.js"></script>

@@ -121,7 +121,7 @@ app.get('/view_invoicedetails', function (req, res) {
             invoices = rows;
             let query3 = "SELECT * FROM RepairTypes"
             db.pool.query(query3, function (error, rows, fields) {
-                res.render('view_invoicedetails', { data: InvoiceDetails, invoices: invoices, services: rows});
+                res.render('view_invoicedetails', { data: InvoiceDetails, invoices: invoices, services: rows });
             })
         })
     })
@@ -341,7 +341,7 @@ app.post('/add-invoice-ajax', function (req, res) {
     })
 });
 
-app.post('/add-invoicedetail-ajax', function(req, res) {
+app.post('/add-invoicedetail-ajax', function (req, res) {
     let data = req.body;
     query1 = `INSERT INTO InvoiceDetails(invoiceID, repairID) VALUE ('${data.invoiceID}', '${data.repairID}')`;
     db.pool.query(query1, function (error, rows, fields) {
@@ -362,10 +362,10 @@ app.post('/add-invoicedetail-ajax', function(req, res) {
                     db.pool.query(query3, function (error, rows, fields) {
                         if (error) {
                             console.log(error);
-                            res. sendStatus(400);
+                            res.sendStatus(400);
                         }
                         else {
-                            cost += rows[rows.length-1].cost;
+                            cost += rows[rows.length - 1].cost;
                             query4 = `UPDATE Invoices SET cost = '${cost}' WHERE invoiceID = '${data.invoiceID}'`;
                             db.pool.query(query4, function (error, rows, fields) {
                                 if (error) {
@@ -379,7 +379,7 @@ app.post('/add-invoicedetail-ajax', function(req, res) {
                                             console.log(error);
                                             res.sendStatus(400);
                                         }
-                                        else{
+                                        else {
                                             res.send(rows);
                                         }
                                     })

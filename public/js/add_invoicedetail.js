@@ -3,7 +3,7 @@ let addCustomerForm = document.getElementById('add-invoicedetail-form-ajax');
 
 // Modify the objects we need
 addCustomerForm.addEventListener("submit", function (e) {
-    
+
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -11,8 +11,8 @@ addCustomerForm.addEventListener("submit", function (e) {
     let inputInvoiceID = document.getElementById("input-invoiceID");
     let invoiceIDValue = inputInvoiceID.value;
     let inputRepairServices = document.getElementsByClassName('service-radio');
-    for (var i=0; inputRepairServices[i]; i++){
-        if(inputRepairServices[i].checked){
+    for (var i = 0; inputRepairServices[i]; i++) {
+        if (inputRepairServices[i].checked) {
             repairID = inputRepairServices[i].id;
             cost = inputRepairServices[i].value;
             break;
@@ -25,7 +25,7 @@ addCustomerForm.addEventListener("submit", function (e) {
         cost: cost,
         repairID: repairID
     }
-    
+
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -41,12 +41,12 @@ addCustomerForm.addEventListener("submit", function (e) {
 
             // Clear the input fields for another transaction
             inputInvoiceID = '';
-            for (var i=0; inputRepairServices[i]; i++){
-                if(inputRepairServices[i].checked){
+            for (var i = 0; inputRepairServices[i]; i++) {
+                if (inputRepairServices[i].checked) {
                     inputRepairServices.checked = false;
                 }
             }
-            
+
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")

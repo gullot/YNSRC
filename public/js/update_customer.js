@@ -30,7 +30,7 @@ updateCustomerForm.addEventListener("submit", function (e) {
 
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            
+
             updateRow(telephoneValue, customerIDValue);
             //reset fields
             inputCustomerID.value = '';
@@ -46,7 +46,7 @@ updateCustomerForm.addEventListener("submit", function (e) {
 
 });
 
-function updateRow(telephoneValue, customerID){
+function updateRow(telephoneValue, customerID) {
 
     let table = document.getElementById("customer-table");
 

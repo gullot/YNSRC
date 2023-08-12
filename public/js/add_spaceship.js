@@ -3,7 +3,7 @@ let addSpaceshipForm = document.getElementById('add-spaceship-form-ajax');
 
 // Modify the objects we need
 addSpaceshipForm.addEventListener("submit", function (e) {
-    
+
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -26,7 +26,7 @@ addSpaceshipForm.addEventListener("submit", function (e) {
 
     //console.log(data.owner);
     //console.log(data.spaceshipMake);
-    
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-spaceship-ajax", true);
