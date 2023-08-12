@@ -39,12 +39,11 @@
     <form id="add-customer-form-ajax">
         <fieldset>
             <legend>Add a new customer: </legend>
-            <label for="input-customerName">Name: </label>
+            <label for="input-customerName" class="required" >Name: </label>
             <input type="text" name="input-customerName" id="input-customerName" required>
-            <label for="input-telephone">Telephone: </label>
-            <input type="text" name="input-telephone" id="input-telephone">
-
-            <input type="submit">
+            <label for="input-telephone" class="required" >Telephone: </label>
+            <input type="text" name="input-telephone" id="input-telephone" required><br>
+            <input type="submit" value="Add">
         </fieldset>
     </form>
     <form id="update-customer-form-ajax">
@@ -57,10 +56,9 @@
                 <option value = "{{this.ID}}">{{this.Name}}</option>
                 {{/each}}
             </select>
-            <label for="input-telephone">Telephone: </label>
-            <input type="text" name="input-telephone-update" id="input-telephone-update">
-            
-            <input type="submit">
+            <label for="input-telephone" class="required" >Telephone: </label>
+            <input type="text" name="input-telephone-update" id="input-telephone-update" required><br>
+            <input type="submit" value="Update">
         </fieldset>
     </form>
     {{!<form>   get rid of search

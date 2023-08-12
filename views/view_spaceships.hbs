@@ -37,17 +37,17 @@
     <form id="add-spaceship-form-ajax">
         <fieldset>
             <legend>Add new spaceship:</legend>
-            <label for="input-owner">Owner</label><br>
+            <label for="input-owner">Owner:</label>
             <select name="input-owner" id="input-owner">
                 <option value="test">Select a Customer</option>
                 {{#each customers}}
                 <option value = "{{this.customerID}}">{{this.customerName}}</option>
                 {{/each}}
-            </select><br>
-            <label for="input-make">Spaceship Make</label><br>
-            <input type="text" id="input-make" name="input-make"><br>
-            <label for="input-model">Spaceship Model</label><br>
-            <input type="text" id="input-model" name="input-model"><br>
+            </select>
+            <label for="input-make" class="required" >Spaceship Make:</label>
+            <input type="text" id="input-make" name="input-make" required>
+            <label for="input-model" class="required" >Spaceship Model:</label>
+            <input type="text" id="input-model" name="input-model" required><br>
             <input type="submit" value="Add">
         </fieldset>
     </form>

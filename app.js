@@ -112,7 +112,7 @@ app.get('/view_services', function (req, res) {
 });
 
 app.get('/view_invoicedetails', function (req, res) {
-    let query1 = "SELECT InvoiceDetails.invoiceID AS 'invoiceID', InvoiceDetails.repairID AS 'serviceID', Customers.customerName AS Name, Spaceships.spaceshipID AS 'spaceshipID', Invoices.cost AS 'totalCost', RepairTypes.repairName AS 'serviceName', RepairTypes.cost AS 'serviceCost' FROM InvoiceDetails INNER JOIN Invoices ON Invoices.invoiceID = InvoiceDetails.invoiceID INNER JOIN RepairTypes ON RepairTypes.repairID = InvoiceDetails.repairID INNER JOIN Spaceships ON Spaceships.spaceshipID = Invoices.spaceshipID INNER JOIN Customers ON Customers.customerID = Spaceships.customerID ORDER BY invoiceID, serviceID ASC"
+    let query1 = "SELECT InvoiceDetails.invoiceID AS 'invoiceID', InvoiceDetails.repairID AS 'serviceID', Customers.customerName AS Name, Spaceships.spaceshipID AS 'spaceshipID', Invoices.cost AS 'totalCost', RepairTypes.repairName AS 'serviceName', RepairTypes.cost AS 'serviceCost' FROM InvoiceDetails INNER JOIN Invoices ON Invoices.invoiceID = InvoiceDetails.invoiceID INNER JOIN RepairTypes ON RepairTypes.repairID = InvoiceDetails.repairID INNER JOIN Spaceships ON Spaceships.spaceshipID = Invoices.spaceshipID LEFT JOIN Customers ON Customers.customerID = Spaceships.customerID ORDER BY invoiceID, serviceID ASC"
 
     db.pool.query(query1, function (error, rows, fields) {
         InvoiceDetails = rows;
