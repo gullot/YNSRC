@@ -8,26 +8,64 @@
 -- Database: `YNSRC`
 --
 
--- Query for add a new character functionality with colon : character being used to 
--- denote the variables that will have data from the backend programming language
 
-SELECT * FROM Customers WHERE :columnName = :input;
+---CUSTOMERS--------------------------------------------------------------------
 
-INSERT INTO Customers (customerName, telephone)
-VALUES (:customerName, :telephone);
+-- Query to display Customers entity
+SELECT customerID AS ID, customerName AS Name, telephone AS Telephone FROM Customers;
 
--- Select a customer based off attribute values
+-- Query to insert into Customers based on '${data.customerName}' and '${data.telephone}' input
+INSERT INTO Customers (customerName, telephone) VALUES  ('${data.customerName}', '${data.telephone}');
 
-DELETE FROM Customers WHERE customerName = :customerName and telephone = :telephone;
+-- Query to get all Customers attributes for dynamic drop-down
+SELECT * FROM Customers;
 
--- Select all spaceships where an attribute is equal to an input
+-- Query to delete a customer
+DELETE FROM Customers WHERE customerID = ?;
 
-SELECT * FROM Spaceships WHERE :columnName = :input;
+-- Query to update a customer based on new '${telephone}' and '${customerIDValue}' input
+UPDATE Customers SET telephone = '${telephone}' WHERE customerID = '${customerIDValue}';
 
--- Add a spaceship into the db
 
-INSERT INTO Spaceships (customerID, spaceshipMake, spaceshipModel)
-VALUES ((SELECT customerID FROM Customers WHERE customerName = :customerName), :spaceshipMake, :spaceshipModel);
+---SPACESHIPS------------------------------------------------------------------
+
+-- Query to display Spaceships entity
+SELECT spaceshipID AS ID, spaceshipMake AS Make, spaceshipModel AS Model, customerID FROM Spaceships;
+
+-- Query to add a spaceship based on '${data.spaceshipMake}', '${data.spaceshipModel}', and '${data.owner}' input
+INSERT INTO Spaceships (spaceshipMake, spaceshipModel, customerID) VALUES ('${data.spaceshipMake}', '${data.spaceshipModel}', (SELECT customerID FROM Customers WHERE customerID = '${data.owner}'));
+
+--Query to get info from spaceships for dynamic drop down
+SELECT * FROM Spaceships;
+
+
+---INVOICES---------------------------------------------------------------------
+-- Query to display Invoices entity
+--THIS WILL PROBABLY CHANGEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+SELECT * FROM Invoices;
+
+
+---REPAIRTYPES------------------------------------------------------------------
+
+-- Query to display RepairTypes entity
+SELECT repairID AS ID, repairName AS Repair, cost AS Cost FROM RepairTypes;
+
+-- Query for adding a repair based on '${data.repairName}' and '${data.cost}' input
+INSERT INTO RepairTypes (repairName, cost) VALUES ('${data.repairName}', '${data.cost}');
+
+-- Query for secondary repair types data grab
+SELECT * FROM RepairTypes;
+
+-- Query to delete a repair
+DELETE FROM RepairTypes WHERE repairID = ?;
+
+
+---INVOICEDETAILS---------------------------------------------------------------
+
+-- Query to display InvoiceDetails, Customers, Spaceships, and RepairTypes all at once on Invoice Details page
+SELECT InvoiceDetails.invoiceID, InvoiceDetails.repairID, Customers.customerName, Spaceships.spaceshipID, Invoices.cost, RepairTypes.repairName, RepairTypes.cost AS repairCost FROM InvoiceDetails INNER JOIN Invoices ON Invoices.invoiceID = InvoiceDetails.invoiceID INNER JOIN RepairTypes ON RepairTypes.repairID = InvoiceDetails.repairID INNER JOIN Spaceships ON Spaceships.spaceshipID = Invoices.spaceshipID INNER JOIN Customers ON Customers.customerID = Spaceships.customerID;
+
+
 
 
 -- Select all invoices
@@ -46,17 +84,4 @@ VALUES (:repairName, :cost)
 -- display invoicedtails table with more than just FKs
 SELECT repairID, repairName FROM RepairTypes
 INNER JOIN InvoiceDetails ON RepairTypes.repairID = repairID;
-
--- colon indicates user input. Added update and delete functions
-
--- update button is included above
-
--- this is what happens when the "SAVE" from the "UPDATE" button is clicked
-UPDATE Customers
-SET customerName = :customerName, telephone = :telephone
-WHERE customerID = :customerID;
-
--- this is the delete button from RepairTypes. Gets rid of a whole row. 
--- Note that since invoicedetails is delete on cascade, this will delete the associated row in the invoicedetails also
-DELETE FROM RepairTypes WHERE repairID = :repairID;
 
