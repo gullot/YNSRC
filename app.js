@@ -24,7 +24,6 @@ var db = require('./database/db-connector')
 app.get('/', function (req, res) {
     let query1 = "SELECT * FROM Customers";
 
-<<<<<<< HEAD
     db.pool.query(query1, function (error, rows, fields) {
 
         res.render('index', { data: rows });              // Note the call to render() and not send(). Using render() ensures the templating engine
@@ -32,11 +31,6 @@ app.get('/', function (req, res) {
     })
 
 });
-=======
-    res.render('index');
-                          
-    });    
->>>>>>> thomas
 
 // app.js - ROUTES section
 app.get('/view_customers', function (req, res) {
