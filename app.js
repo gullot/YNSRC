@@ -63,14 +63,9 @@ app.get('/view_spaceships', function (req, res) {
                 return Object.assign(ship, { customerName: customerMap[ship.customerID] })
             })
 
-            //console.log(customers);
-            //console.log(customerMap);
-            //console.log(spaceships);
 
             return res.render('view_spaceships', { data: spaceships, customers: customers });
         })
-
-        //res.render('view_spaceships', {data:rows});
 
     })
 });
@@ -126,19 +121,6 @@ app.post('/add-customer-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    /*// Capture NULL values   NO NULL VALUES FOR CUSTOMERS
-    let homeworld = parseInt(data.homeworld);
-    if (isNaN(homeworld))
-    {
-        homeworld = 'NULL'
-    }
-
-    let age = parseInt(data.age);
-    if (isNaN(age))
-    {
-        age = 'NULL'
-    }*/
-
     // Create the query and run it on the database
     query1 = `INSERT INTO Customers (customerName, telephone) VALUES  ('${data.customerName}', '${data.telephone}')`;
     db.pool.query(query1, function (error, rows, fields) {
@@ -174,7 +156,6 @@ app.post('/add-customer-ajax', function (req, res) {
 app.post('/add-spaceship-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    //console.log(data.owner);
 
     // Create the query and run it on the database (data.owner)?????
     query1 = `INSERT INTO Spaceships (spaceshipMake, spaceshipModel, customerID) VALUES ('${data.spaceshipMake}', '${data.spaceshipModel}', (SELECT customerID FROM Customers WHERE customerID = '${data.owner}'))`;
@@ -211,7 +192,6 @@ app.post('/add-spaceship-ajax', function (req, res) {
 app.post('/add-repair-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    //console.log(data.owner);
 
     // Create the query and run it on the database (data.owner)?????
     query1 = `INSERT INTO RepairTypes (repairName, cost) VALUES ('${data.repairName}', '${data.cost}')`;
