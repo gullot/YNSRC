@@ -111,7 +111,7 @@ CREATE TABLE `InvoiceDetails` (
   `invoiceID` int(11),
   `repairID` int(11),
   FOREIGN KEY (invoiceID) REFERENCES Invoices(invoiceID) ON DELETE CASCADE,
-  FOREIGN KEY (repairID) REFERENCES RepairTypes(repairID) ON DELETE CASCADE
+  FOREIGN KEY (repairID) REFERENCES RepairTypes(repairID) ON DELETE SET NULL
 );
 
 --

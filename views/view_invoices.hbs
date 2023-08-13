@@ -4,7 +4,7 @@
 <h2>Invoices</h2>
 <table id="invoices-table">
 
-        {{!-- Header section --}}
+    {{!-- Header section --}}
     <thead>
 
         {{!-- For just the first row, we print each key of the row object as a header cell so we
@@ -15,9 +15,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th>
-                Delete
-            </th>
         </tr>
     </thead>
 
@@ -30,32 +27,55 @@
             <td>{{this.ID}}</td>
             <td>{{this.Cost}}</td>
             <td>{{this.spaceshipID}}</td>
-            <td><input type="submit" value="Delete"></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 <form id="add-invoice-form-ajax">
-        <fieldset>
-            <legend>Add a new invoice: </legend>
-            <label for="input-spaceshipOwner">Owner: </label>
-            <input type="text" name="input-spaceshipOwner" id="input-spaceshipOwner" required>
-            <label for="input-spaceshipModel">Model: </label>
-            <input type="text" name="input-spaceshipModel" id="input-spaceshipModel">
-            <br>
-            <label for="input-services">Repair Services: </label>
-            {{#each services}}
-            <div>
-            <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}" value={{this.cost}} class="service-checkbox">
+    <fieldset>
+        <legend>Add a new invoice: </legend>
+        <label for="input-spaceshipOwner" class="required">Owner: </label>
+        <input type="text" name="input-spaceshipOwner" id="input-spaceshipOwner" required>
+        <label for="input-spaceshipModel" class="required">Model: </label>
+        <input type="text" name="input-spaceshipModel" id="input-spaceshipModel" required>
+        <br>
+        <label for="input-services">Repair Services: </label>
+        {{#each services}}
+        <div>
+            <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}" value={{this.cost}}
+                class="service-checkbox">
             <label for="{{this.repairName}}">{{this.repairName}}</label>
-            </div>
+        </div>
+        {{/each}}
+        <br>
+        <input type="submit" value="Add">
+    </fieldset>
+</form>
+<form id="update-invoice-form-ajax">
+    <fieldset>
+        <legend>Update an invoice: </legend>
+        <label for="input-invoiceID-update">Invoice ID#: </label>
+        <select name="input-invoiceID-update" id="input-invoiceID-update">
+            <option value="test">Select an invoice</option>
+            {{#each data}}
+            <option value="{{this.ID}}">{{this.ID}}</option>
             {{/each}}
-            <br>
-            <input type="submit">
-        </fieldset>
-    </form>
+        </select>
+        <br>
+        <label for="input-service-update">Repair Services: </label>
+        {{#each services}}
+        <div>
+            <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}" value={{this.cost}}
+                class="service-checkbox-update">
+            <label for="{{this.repairName}}">{{this.repairName}}</label>
+        </div>
+        {{/each}}
+        <br>
+        <input type="submit" value="Update">
+    </fieldset>
+</form>
 <footer>
-<p>&copy; 2023 Seattle Squad OSU CS340</p>
+    <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>
 
 <script src="./js/add_invoice.js"></script>

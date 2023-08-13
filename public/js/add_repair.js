@@ -3,7 +3,7 @@ let addRepairForm = document.getElementById('add-repair-form-ajax');
 
 // Modify the objects we need
 addRepairForm.addEventListener("submit", function (e) {
-    
+
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -20,9 +20,9 @@ addRepairForm.addEventListener("submit", function (e) {
         repairName: repairNameValue,
         cost: costValue
     }
-    
+
     //console.log(data);
-    
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-repair-ajax", true);
@@ -73,7 +73,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.repairID;
     repairNameCell.innerText = newRow.repairName;
-    costCell.innerText = newRow.cost.toLocaleString('en-us', {style: 'currency', currency: 'USD'});
+    costCell.innerText = newRow.cost.toLocaleString('en-us', { style: 'currency', currency: 'USD' });
 
     // https://stackoverflow.com/questions/15315315/how-do-i-add-a-button-to-a-td-using-js
     let btn = document.createElement('input');
@@ -81,7 +81,7 @@ addRowToTable = (data) => {
     btn.id = newRow.repairID
     btn.className = "btn";
     btn.value = "Delete";
-    btn.onclick = function(){
+    btn.onclick = function () {
         deleteRepair(newRow.repairID);
     };
 
@@ -92,7 +92,7 @@ addRowToTable = (data) => {
     row.appendChild(repairNameCell);
     row.appendChild(costCell);
     row.appendChild(btn);
-    
+
     row.setAttribute('data-value', newRow.repairID);
     //console.log(row);
 

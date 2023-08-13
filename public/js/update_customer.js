@@ -10,9 +10,6 @@ updateCustomerForm.addEventListener("submit", function (e) {
     let customerIDValue = inputCustomerID.value
     let telephoneValue = inputTelephone.value;
 
-    console.log("customer ID: " + customerIDValue);
-    console.log("telephone: " + telephoneValue);
-
     //removing this, becuase phone numbers can have dashes in them.
     /*if (isNaN(telephoneValue))
     {
@@ -25,15 +22,13 @@ updateCustomerForm.addEventListener("submit", function (e) {
         telephone: telephoneValue,
     };
 
-    console.log(data);
-
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-customer-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            
+
             updateRow(telephoneValue, customerIDValue);
             //reset fields
             inputCustomerID.value = '';
@@ -49,7 +44,7 @@ updateCustomerForm.addEventListener("submit", function (e) {
 
 });
 
-function updateRow(telephoneValue, customerID){
+function updateRow(telephoneValue, customerID) {
 
     let table = document.getElementById("customer-table");
 

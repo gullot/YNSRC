@@ -19,7 +19,7 @@ function deleteCustomer(customerID) {
     xhttp.send(JSON.stringify(data));
 };
 
-function deleteRow(customerID){
+function deleteRow(customerID) {
     let table = document.getElementById("customer-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
