@@ -1,3 +1,5 @@
+// the below form is adapted from the CS340 node js starter app
+
 let updateCustomerForm = document.getElementById('update-customer-form-ajax');
 
 updateCustomerForm.addEventListener("submit", function (e) {

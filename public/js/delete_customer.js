@@ -1,3 +1,5 @@
+// the below form is adapted from the CS340 node js starter app
+
 function deleteCustomer(customerID) {
     let data = {
         id: customerID

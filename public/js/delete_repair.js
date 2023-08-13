@@ -1,9 +1,9 @@
+// the below form is adapted from the CS340 node js starter app
+
 function deleteRepair(repairID) {
     let data = {
         id: repairID
     };
-
-    //console.log(data);
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "/delete-repair-ajax", true);

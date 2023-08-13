@@ -18,6 +18,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 var db = require('./database/db-connector')
 
 
+//routes below are based on and adapted from the CS340 node js starter app 
 /*
     ROUTES
 */

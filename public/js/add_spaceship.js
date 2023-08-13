@@ -1,3 +1,5 @@
+// the below form is adapted from the CS340 node js starter app
+
 // Get the objects we need to modify
 let addSpaceshipForm = document.getElementById('add-spaceship-form-ajax');
 
