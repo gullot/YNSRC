@@ -44,6 +44,13 @@ SELECT * FROM Spaceships;
 --THIS WILL PROBABLY CHANGEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 SELECT * FROM Invoices;
 
+-- Query to add to Invoices entity based on user input '${data.cost}' to the spaceship that has spaceshipModel = '${data.model}' and customerName = '${data.owner}'
+INSERT INTO Invoices (cost, spaceshipID) VALUES ('${data.cost}', (SELECT spaceshipID FROM Spaceships WHERE spaceshipModel = '${data.model}' AND customerID = (SELECT customerID FROM Customers WHERE customerName = '${data.owner}')))
+
+-- Query to update the invoice based on '${cost}' and '${invoiceIDValue}'
+UPDATE Invoices SET cost = '${cost}' WHERE invoiceID = '${invoiceIDValue}';
+-- Query to grab repair name to update invoice with 
+SELECT repairName FROM RepairTypes WHERE repair ID = (SELECT repairID FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}');
 
 ---REPAIRTYPES------------------------------------------------------------------
 
@@ -63,25 +70,25 @@ DELETE FROM RepairTypes WHERE repairID = ?;
 ---INVOICEDETAILS---------------------------------------------------------------
 
 -- Query to display InvoiceDetails, Customers, Spaceships, and RepairTypes all at once on Invoice Details page
-SELECT InvoiceDetails.invoiceID, InvoiceDetails.repairID, Customers.customerName, Spaceships.spaceshipID, Invoices.cost, RepairTypes.repairName, RepairTypes.cost AS repairCost FROM InvoiceDetails INNER JOIN Invoices ON Invoices.invoiceID = InvoiceDetails.invoiceID INNER JOIN RepairTypes ON RepairTypes.repairID = InvoiceDetails.repairID INNER JOIN Spaceships ON Spaceships.spaceshipID = Invoices.spaceshipID INNER JOIN Customers ON Customers.customerID = Spaceships.customerID;
+SELECT InvoiceDetails.invoiceID AS 'invoiceID', InvoiceDetails.repairID AS 'serviceID', Customers.customerName AS Name, Spaceships.spaceshipID AS 'spaceshipID', Invoices.cost AS 'totalCost', RepairTypes.repairName AS 'serviceName', RepairTypes.cost AS 'serviceCost' FROM InvoiceDetails INNER JOIN Invoices ON Invoices.invoiceID = InvoiceDetails.invoiceID INNER JOIN RepairTypes ON RepairTypes.repairID = InvoiceDetails.repairID INNER JOIN Spaceships ON Spaceships.spaceshipID = Invoices.spaceshipID LEFT JOIN Customers ON Customers.customerID = Spaceships.customerID ORDER BY invoiceID, serviceID ASC;
 
+-- Query to return the related invoiceIDs
+SELECT invoiceID FROM Invoices ORDER BY invoiceID;
 
+-- Query to return the RepairType information
+SELECT * FROM RepairTypes;
 
+-- Query to add an invoice-service relationship based on '${data.invoiceID}' and '${data.repairID}'
+INSERT INTO InvoiceDetails(invoiceID, repairID) VALUE ('${data.invoiceID}', '${data.repairID}')
+-- Query to grab the cost of the repair needing to be updated based on the addition of the new service to be added
+SELECT cost FROM RepairTypes WHERE repairID = '${data.repairID}';
+-- Query to grab the cost of the invoice needing to be updated
+SELECT cost from Invoices WHERE invoiceID = '${data.invoiceID}';
+-- Query updating the total cost of the related invoice from the new relationship
+UPDATE Invoices SET cost = '${cost}' WHERE invoiceID = '${data.invoiceID}';
 
--- Select all invoices
+-- Query to update intersection table InvoiceDetails when adding an invoice, using user input '${invoiceID}' and each selected repairID from '${repairServices[i]}'
+INSERT INTO InvoiceDetails (invoiceID, repairID) VALUES ('${invoiceID}', (SELECT repairID FROM RepairTypes WHERE repairName = '${repairServices[i]}'));
 
-SELECT * FROM Invoices WHERE :columnName = :input;
-
-INSERT INTO Invoices (cost, spaceshipID)
-VALUES (:cost, (SELECT spaceshipID FROM Spaceships WHERE customerID = (SELECT customerID FROM Customers WHERE customerName = :customerName) and spaceshipModel = :spaceshipModel));
-
-INSERT INTO InvoiceDetails (invoiceID, repairID)
-VALUES (:invoiceID, :repairID)
-
-INSERT INTO RepairTypes (repairName, cost)
-VALUES (:repairName, :cost)
-
--- display invoicedtails table with more than just FKs
-SELECT repairID, repairName FROM RepairTypes
-INNER JOIN InvoiceDetails ON RepairTypes.repairID = repairID;
-
+-- Query to reset invoicedetails upon adding new services to it
+DELETE FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}';
