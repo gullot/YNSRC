@@ -90,7 +90,7 @@ addRowToTable = (data) => {
 
     // Fill the cells with correct data
     idCell.innerText = newRow.invoiceID;
-    costCell.innerText = newRow.cost;
+    costCell.innerText = newRow.cost.toLocaleString('en-us', { style: 'currency', currency: 'USD' });
     spaceshipIDCell.innerText = newRow.spaceshipID;
 
     // Add the cells to the row 
