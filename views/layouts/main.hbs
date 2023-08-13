@@ -10,16 +10,53 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta name='robots' content='noindex, noarchive, nofollow' />
     <style>
+        body {
+            background-color: aliceblue;
+            background-position: top left;
+            color:var(--custom-color-dark-green);
+            font-family: 'Poppins', sans-serif;; /* Define with at least one font name and its related generic family name.*/
+            margin:0 auto;
+            padding:5px;
+            max-width: 1200px;
+            min-width: 800px;
+            }
+
         table,
-        th,
+
+        th {
+            border-color: 1px solid black;
+            padding: 1px;
+        }
         td {
             border: 1px solid black;
             border-collapse: collapse;
             min-width: 50px;
         }
 
+        tr:nth-child(even) {
+            background-color:aliceblue;
+        }
+        tr:nth-child(odd){
+            background-color: white;
+        }
+
         nav {
             padding: 10px;
+        }
+
+        nav a {
+            background-color:aliceblue;
+            border:1px solid black;
+            border-radius:5px 5px 0 0; 
+            color: cadetblue;
+            font-size:1.1em;
+            font-weight:bold;
+            margin-right:3px;
+            padding: 20px;
+        }
+        nav a:hover {
+            background-color:white;
+            color:black;
         }
 
         fieldset {
@@ -34,6 +71,17 @@
             content: " *";
             color: red;
         }
+
+        footer {
+            color:cadetblue;
+            background-color:aliceblue;
+            margin-left:0%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            text-align: center;
+            padding:5px;
+        }
+
     </style>
 </head>
 
