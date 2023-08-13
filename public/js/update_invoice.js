@@ -14,17 +14,23 @@ updateInvoiceForm.addEventListener("submit", function (e) {
     for (var i = 0; inputRepairServices[i]; i++) {
         if (inputRepairServices[i].checked) {
             cost += parseInt(inputRepairServices[i].value);
-            repairServices.push(inputRepairServices[i].id);
+            //repairServices.push(inputRepairServices[i].id);
+            repairServices.push(inputRepairServices[i].name);
         }
     }
 
     let invoiceIDValue = inputInvoiceID.value
+    //console.log(inputInvoiceID.value);
 
     let data = {
         invoiceIDValue: invoiceIDValue,
         repairServices: repairServices,
         cost: cost
     };
+
+    console.log(repairServices);
+    console.log(inputRepairServices[0].checked);
+    //console.log(inputRepairServices[4].checked);
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-invoice-ajax", true);

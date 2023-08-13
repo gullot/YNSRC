@@ -53,8 +53,36 @@
     </fieldset>
 </form>
 
+<form id="update-spaceship-form-ajax">
+    <fieldset>
+        <legend>Update a spaceship:</legend>
+        <label for="input-spaceship-update">Spaceship:</label>
+        <select name="input-spaceship-update" id="input-spaceship-update">
+            <option value="test">Select a Spaceship</option>
+            {{#each data}}
+            <option value="{{this.ID}}">{{this.Make}} {{this.Model}} of ID:{{this.ID}}</option>
+            {{/each}}
+        </select>
+        <label for="input-owner-update">New owner:</label>
+        <select name="input-owner-update" id="input-owner-update">
+            <option value="test">Select a Customer</option>
+            {{#each customers}}
+            <option value="{{this.customerID}}">{{this.customerName}}</option>
+            {{/each}}
+            <option value="NULL">NULL</option>
+        </select>
+        <label for="input-make-update">Spaceship Make:</label>
+        <input type="text" id="input-make-update" name="input-make-update">
+        <label for="input-model-update">Spaceship Model:</label>
+        <input type="text" id="input-model-update" name="input-model-update"><br>
+        <input type="submit" value="Update">
+    </fieldset>
+</form>
+
 <footer>
     <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>
 
 <script src="./js/add_spaceship.js"></script>
+<script src="./js/update_spaceship.js"></script>
+<script src="./js/populate_make_model.js"></script>

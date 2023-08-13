@@ -26,9 +26,6 @@ addSpaceshipForm.addEventListener("submit", function (e) {
         spaceshipModel: modelValue
     };
 
-    //console.log(data.owner);
-    //console.log(data.spaceshipMake);
-
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-spaceship-ajax", true);

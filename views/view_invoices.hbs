@@ -52,7 +52,8 @@
         <input type="submit" value="Add">
     </fieldset>
 </form>
-<form id="update-invoice-form-ajax">
+
+{{!-- <form id="update-invoice-form-ajax">
     <fieldset>
         <legend>Update an invoice: </legend>
         <label for="input-invoiceID-update">Invoice ID#: </label>
@@ -66,17 +67,19 @@
         <label for="input-service-update">Repair Services: </label>
         {{#each services}}
         <div>
-            <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}" value={{this.cost}}
+            <input type="checkbox" name="{{this.repairName}}" id="{{this.repairName}}-update" value={{this.cost}}
                 class="service-checkbox-update">
-            <label for="{{this.repairName}}">{{this.repairName}}</label>
+            <label for="{{this.repairName}}-update">{{this.repairName}}</label>
         </div>
         {{/each}}
         <br>
         <input type="submit" value="Update">
     </fieldset>
 </form>
+--}}
 <footer>
     <p>&copy; 2023 Seattle Squad OSU CS340</p>
 </footer>
 
 <script src="./js/add_invoice.js"></script>
+<script src="./js/update_invoice.js"></script>

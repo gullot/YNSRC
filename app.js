@@ -5,7 +5,7 @@ var app = express();            // We need to instantiate an express object to i
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
-PORT = 61288;                 // Set a port number at the top so it's easy to change in the future
+PORT = 61289;                 // Set a port number at the top so it's easy to change in the future
 
 // handlebars stuff
 const { engine } = require('express-handlebars');
@@ -282,6 +282,36 @@ app.put('/put-customer-ajax', function (req, res, next) {
     })
 });
 
+// route to update a spaceship
+app.put('/put-spaceship-ajax', function (req, res, next) {
+    let data = req.body;
+    let spaceshipIDValue = data.spaceshipID;
+    let newOwner = data.newOwner;
+    let newMake = data.newMake;
+    let newModel = data.newModel;
+    // query updating the spaceship information
+    let queryUpdateSpaceship = `UPDATE Spaceships SET customerID = '${newOwner}', spaceshipMake = '${newMake}', spaceshipModel = '${newModel}' WHERE spaceshipID = '${spaceshipIDValue}'`;
+    db.pool.query(queryUpdateSpaceship, function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else {
+            queryCustomerName = `SELECT customerName FROM Customers WHERE customerID = '${newOwner}'`;
+            db.pool.query(queryCustomerName, function (error, rows, fields){
+                if (error){
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else{
+                    res.send(rows);
+                }
+            })
+            }
+            
+        })
+    });
+
 // route for adding an invoice
 app.post('/add-invoice-ajax', function (req, res) {
     let data = req.body;
@@ -381,27 +411,31 @@ app.post('/add-invoicedetail-ajax', function (req, res) {
     })
 })
 
-// route to update an invoice
+/*// route to update an invoice
 app.put('/put-invoice-ajax', function(req, res, next) {
+    console.log("YYYYYYYYYYYYYYYYYY");
     let data = req.body;
     let invoiceIDValue = data.invoiceIDValue;
     let repairServices = data.repairServices;
     let cost = data.cost
+    //is updating the cost of all repairs associated to the invoiceID
     let queryUpdateInvoice = `UPDATE Invoices SET cost = '${cost}' WHERE invoiceID = '${invoiceIDValue}'`;
-    db.pool.query(queryUpdateTelephone, function (error, rows, fields) {
+    db.pool.query(queryUpdateInvoice, function (error, rows, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         }
         else {
-            let queryFindInvoiceDetails = `SELECT repairName FROM RepairTypes WHERE repair ID = (SELECT repairID FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}')`
+            console.log("success query 1");
+            let queryFindInvoiceDetails = `SELECT repairName FROM RepairTypes WHERE repairID = (SELECT repairID FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}')`;
             db.pool.query(queryFindInvoiceDetails, function (error, rows, fields) {
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
                 }
                 else {
-                    let queryResetInvoiceDetails = `DELETE FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}'`
+                    console.log("success query 2");
+                    let queryResetInvoiceDetails = `DELETE FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}'`;
                     for (var i = 0; repairServices[i]; i++) {
 
                         for (var j = 0; rows[j], j++;) {
@@ -418,7 +452,7 @@ app.put('/put-invoice-ajax', function(req, res, next) {
         }
     }
     )
-})
+})*/
 
 /*
     LISTENER
