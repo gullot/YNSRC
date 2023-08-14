@@ -290,7 +290,7 @@ app.put('/put-spaceship-ajax', function (req, res, next) {
     let newMake = data.newMake;
     let newModel = data.newModel;
     // query updating the spaceship information
-    let queryUpdateSpaceship = `UPDATE Spaceships SET customerID = '${newOwner}', spaceshipMake = '${newMake}', spaceshipModel = '${newModel}' WHERE spaceshipID = '${spaceshipIDValue}'`;
+    let queryUpdateSpaceship = `UPDATE Spaceships SET customerID = ${newOwner}, spaceshipMake = '${newMake}', spaceshipModel = '${newModel}' WHERE spaceshipID = '${spaceshipIDValue}'`;
     db.pool.query(queryUpdateSpaceship, function (error, rows, fields) {
         if (error) {
             console.log(error);

@@ -56,7 +56,7 @@
 <form id="update-spaceship-form-ajax">
     <fieldset>
         <legend>Update a spaceship:</legend>
-        <label for="input-spaceship-update">Spaceship:</label>
+        <label for="input-spaceship-update" class="required">Spaceship:</label>
         <select name="input-spaceship-update" id="input-spaceship-update">
             <option value="test">Select a Spaceship</option>
             {{#each data}}
@@ -65,9 +65,9 @@
         </select>
         <label for="input-owner-update">New owner:</label>
         <select name="input-owner-update" id="input-owner-update">
-            <option value="test">Select a Customer</option>
+            <option value="NULL">Select a Customer</option>
             {{#each customers}}
-            <option value="{{this.customerID}}">{{this.customerName}}</option>
+            <option {{!text="{{this.customerName}} value="{{this.customerID}}">{{this.customerName}}</option>
             {{/each}}
             <option value="NULL">NULL</option>
         </select>

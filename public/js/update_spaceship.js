@@ -11,14 +11,12 @@ updateSpaceshipForm.addEventListener("submit", function (e) {
     let inputNewMake = document.getElementById("input-make-update");
     let inputNewModel = document.getElementById("input-model-update");
 
-    //inputSpaceshipID.addEventListener("change", function(){
-    //    inputNewMake.value = inputSpaceshipID.name;
-    //})
-
     let spaceshipIDValue = inputSpaceshipID.value;
     let ownerIDValue = inputNewOwnerID.value;
     let inputNewMakeValue = inputNewMake.value;
     let inputNewModelValue = inputNewModel.value;
+    //let ownerNameValue = inputNewOwnerID.text;
+    //console.log(ownerNameValue);
 
     let data = {
         spaceshipID: spaceshipIDValue,
@@ -46,7 +44,6 @@ updateSpaceshipForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.");
         }
     }
-
     xhttp.send(JSON.stringify(data));
 
 });
@@ -67,10 +64,17 @@ function updateRow(spaceshipID, newOwner, newMake, newModel) {
             tdModel.innerHTML = newModel;
 
             let tdOwner = updateRowIndex.getElementsByTagName("td")[3];
-            tdOwner.innerHTML = newOwner;
+            console.log(newOwner);
+            if (newOwner === 'NULL'){
+                tdOwner.innerHTML = '';
+            }
+            else{
+                tdOwner.innerHTML = newOwner;
+            }
 
-            let tdName = updateRowIndex.getElementsByTagName("td")[4];
-            tdName.innerHTML = "uhhh";
+            //let tdName = updateRowIndex.getElementsByTagName("td")[4];
+            //tdName.innerHTML = "uhhh";
+            location.reload();
         }
     }
 };
