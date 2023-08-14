@@ -1,4 +1,5 @@
-// the below form is adapted from the CS340 node js starter app
+// the below form is adapted from the CS340 node js starter app with the exception
+// of addRowToTable function
 
 // Get the objects we need to modify
 let addSpaceshipForm = document.getElementById('add-spaceship-form-ajax');

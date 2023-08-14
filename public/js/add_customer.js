@@ -1,4 +1,6 @@
 // the below form is adapted from the CS340 node js starter app
+// line 88 cites https://stackoverflow.com/questions/15315315/how-do-i-add-a-button-to-a-td-using-js
+// to add a button to the table
 
 // Get the objects we need to modify
 let addCustomerForm = document.getElementById('add-customer-form-ajax');

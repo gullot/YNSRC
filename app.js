@@ -1,3 +1,7 @@
+//routes below are based on and adapted from the CS340 node js starter app 
+// the for loop defined in /add-invoice-ajax route is our own original work
+
+
 // Express
 var express = require('express');   // We are using the express library for the web server
 var app = express();            // We need to instantiate an express object to interact with the server in our code
@@ -18,7 +22,6 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 var db = require('./database/db-connector')
 
 
-//routes below are based on and adapted from the CS340 node js starter app 
 /*
     ROUTES
 */
@@ -410,49 +413,6 @@ app.post('/add-invoicedetail-ajax', function (req, res) {
         }
     })
 })
-
-/*// route to update an invoice
-app.put('/put-invoice-ajax', function(req, res, next) {
-    console.log("YYYYYYYYYYYYYYYYYY");
-    let data = req.body;
-    let invoiceIDValue = data.invoiceIDValue;
-    let repairServices = data.repairServices;
-    let cost = data.cost
-    //is updating the cost of all repairs associated to the invoiceID
-    let queryUpdateInvoice = `UPDATE Invoices SET cost = '${cost}' WHERE invoiceID = '${invoiceIDValue}'`;
-    db.pool.query(queryUpdateInvoice, function (error, rows, fields) {
-        if (error) {
-            console.log(error);
-            res.sendStatus(400);
-        }
-        else {
-            console.log("success query 1");
-            let queryFindInvoiceDetails = `SELECT repairName FROM RepairTypes WHERE repairID = (SELECT repairID FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}')`;
-            db.pool.query(queryFindInvoiceDetails, function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                }
-                else {
-                    console.log("success query 2");
-                    let queryResetInvoiceDetails = `DELETE FROM InvoiceDetails WHERE invoiceID = '${invoiceIDValue}'`;
-                    for (var i = 0; repairServices[i]; i++) {
-
-                        for (var j = 0; rows[j], j++;) {
-                            if (rows[j] == repairServices) {
-                                
-                            }
-                        }
-                    }
-                    db.pool.query(queryResetInvoiceDetails, function (error, rows, fields) {
-
-                    })
-                }
-            })
-        }
-    }
-    )
-})*/
 
 /*
     LISTENER
